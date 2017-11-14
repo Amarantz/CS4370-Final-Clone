@@ -4,12 +4,15 @@
         <tr>
             <td>
                 <label for="username">Username</label>
+            </td><td>
                 <input type="email" id="f_username" name="f_username" placeholder="Enter a valid email address" required />
             </td>
         </tr>
         <tr>
             <td>
                 <label for="password">Password</label>
+            </td>
+            <td>
                 <input type="password" id="f_password" name="f_password" required />
             </td>
         </tr>
@@ -17,6 +20,10 @@
             <td>
                 <button type="submit">Sign-in</button>
             </td>
+        </tr>
+        <tr>
+            <td><a href="{{ base_url }}/registration">Register</a></td>
+            <td><a href="{{ base_url}}/forgotpassword">Forgot Password</a></td>
         </tr>
     </table>
 </form>

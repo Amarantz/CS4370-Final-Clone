@@ -23,6 +23,6 @@ final class HomeAction
     {
         $this->log->info("Homepage action dispatched");
 
-        return $this->view->render($response, 'index.html.twig', []);
+        return $this->view->render($response, 'index.html.twig', ['login' => true,]);
     }
 }
