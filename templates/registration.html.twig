@@ -1,0 +1,21 @@
+{% block registration }
+<form> 
+<table name="registration" method="post" action="{{ baseurl }}/profile/create">
+	<tr>
+		<td>Email</td> 
+		<td><input type="email" id="f_username" name="f_username" required="true"></td>
+	</tr>
+	<tr>
+		<td>Password</td>
+		<td><input type="password" id="f_password" name="f_pasword" required="true" maxlength="30" pattern="[a-zA-Z0-9- _!]"></td>
+	</tr>
+	<tr>
+		<td>Confirm Password</td>
+		<td><input type="password" id="f_cpassword" name="f_cpassword" required="true" maxlength="30" pattern="[a-zA-Z0-9- _!]"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><input type="submit"></td>
+	</tr>
+</form>
+{% endblock }

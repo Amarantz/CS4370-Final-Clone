@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class QuestionEloquentModel extends Model{
+    protected $table = 'QuestionEloquentModel';
+    protected $fillable = ['question','uuid','questionID','body','date','userID'];
+}
