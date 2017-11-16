@@ -2,10 +2,12 @@
 
 namespace Tests\Functional;
 
-class MysqlTest extends BaseTestCase {
+class MysqlTest extends BaseTestCase
+{
 
-    public function testDatabase() {
-        $db = new \PDO('mysql:host=localhost;dbname=web4350','appuser','Kmustang@1');
+    public function testDatabase()
+    {
+        $db = new \PDO('mysql:host=localhost;dbname=web4350', 'appuser', 'Kmustang@1');
         $sql = "select now()";
         $sql = $db->prepare($sql);
 
@@ -14,7 +16,8 @@ class MysqlTest extends BaseTestCase {
         $this->assertTrue(isset($result));
     }
 
-    public function testDatabaseBadPass() {
+    public function testDatabaseBadPass()
+    {
 
         $actual = null;
         try {
@@ -25,5 +28,4 @@ class MysqlTest extends BaseTestCase {
 
         $this->assertTrue(!empty($actual));
     }
-
 }

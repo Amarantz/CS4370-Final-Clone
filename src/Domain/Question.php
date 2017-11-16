@@ -8,88 +8,83 @@
 
 namespace App\Domain;
 
-
 class Question
 {
-    protected $uuid;
-    protected $id;
+    protected $ID;
     protected $question;
-    protected $body;
+    protected $details;
     protected $user;
     protected $updatedDate;
     protected $creationDate;
 
-    public function __construct() {
-        $this->uuid = uniqid("que_");
+    public function __construct(\App\Domain\User $user, $question, $details)
+    {
+        $this->ID = uniqid("QUE_");
+        $this->setQuestion($question);
+        $this->setDetails($details);
+        $this->setUser($user);
+        $this->creationDate = date('Y-m-d H:i:s');
+        $this->modifiedDate = date('Y-m-d H:i:s');
     }
 
-    public function setQuestion($s) {
-	if(empty($s)) {
-	    throw new \InvalidArgumentException("Not a valid Argument");
-	}
-	    
-        if(!is_string($s)) {
+    protected function setQuestion($s)
+    {
+        if (empty($s)) {
+            throw new \InvalidArgumentException("Not a valid Argument");
+        }
+        
+        if (!is_string($s)) {
             throw new \InvalidArgumentException("Argument is not a string");
         }
 
-        if(strlen($s) > 256) {
-            throw new \InvalidArgumentException("QuestionEloquentModel length is to long");
+        if (strlen($s) > 256) {
+            throw new \InvalidArgumentException("Question length is to long");
         }
 
-	$this->question = $s;
-	return $this;
+        $this->question = $s;
+        return $this;
     }
 
-    public function setBody($s) {
-        if(empty($s)){
-	    throw new \InvalidArgumentException("Not a valid Argument");
-	}
-        if(!is_string($s)) {
+    protected function setDetails($s)
+    {
+        if (empty($s)) {
+            throw new \InvalidArgumentException("Not a valid Argument");
+        }
+        if (!is_string($s)) {
             throw new \InvalidArgumentException("Argument is not a string");
         }
 
-        if (strlen($s) > 1000 ) {
-            throw new \InvalidArgumentException("QuestionEloquentModel body is to long");
+        if (strlen($s) > 1000) {
+            throw new \InvalidArgumentException("Question body is to long");
         }
 
-	$this->body = $s;
-	return $this;
-
+        $this->details = $s;
+        return $this;
     }
 
-    public function setCreationDate(\Date $d) {
-	$this->creationDate = $d;
-	return $this;
+    protected function setUser(\App\Domain\user $u)
+    {
+        $this->user = $u;
+        return $this;
     }
 
-    public function getCreationDate() {
-	return $this->creationDate;
-    }
-
-    public function setUpdateDate(\Date $d) {
-	$this->updatedDate = $d ;
-
-	return $this;
-    }
-
-    public function setUser(\App\Domain\user $u) {
-	$this->user = $u;
-	return $this;
-    }
-
-    public function getUser() {
+    public function getUser()
+    {
         return $this->user;
     }
 
-    public function getQuestion() {
+    public function getQuestion()
+    {
         return $this->question;
     }
 
-    public function getUuid() {
-        return $this->uuid;
+    public function getID()
+    {
+        return $this->ID;
     }
 
-    public function getBody() {
-        return $this->body;
+    public function getDetails()
+    {
+        return $this->details;
     }
 }

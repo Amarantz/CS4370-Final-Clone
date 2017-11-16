@@ -2,24 +2,23 @@
 
 namespace Tests\Functional;
 
-class MemcacheTest extends BaseTestCase {
+class MemcacheTest extends BaseTestCase
+{
 
-	public function testMemcache()
-	{
-		//Arrange
-		$m = new \Memcache;
+    public function testMemcache()
+    {
+        //Arrange
+        $m = new \Memcache;
 
-		$m->addServer('127.0.0.1');
+        $m->addServer('127.0.0.1');
 
-		//Act
-		$expected = "This is some Value";
-		$m->add("Key","This is some Value",false,30);
+        //Act
+        $expected = "This is some Value";
+        $m->add("Key", "This is some Value", false, 30);
 
-		$result = $m->get("Key");
+        $result = $m->get("Key");
 
-		//Assert
-		$this->assertEquals($expected,$result);
-
-	}
-
+        //Assert
+        $this->assertEquals($expected, $result);
+    }
 }

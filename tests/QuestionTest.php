@@ -5,39 +5,36 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
     public function testQuestionSubject()
     {
         //arrange
-        $expect  = "This is a QuestionEloquentModel";
+        $expect  = "This is a Question";
         //act
-        $q = new \App\Domain\Question();
-        $q->setQuestion("This is a QuestionEloquentModel");
+        $q = new \App\Domain\Question(new \App\Domain\User("Test@Test.com", "Tester 1"), "This is a Question", "This is our details");
         //assert
 
-        $this->assertTrue(!empty($q->getUuid()));
-        $this->assertEquals($expect,$q->getQuestion());
+        $this->assertTrue(!empty($q->getID()));
+        $this->assertEquals($expect, $q->getQuestion());
     }
 
     public function testQuestionSubjectFail()
     {
         //arrange
-        $expect  = "This is a QuestionEloquentModel";
+        $expect  = "This is a Question";
         //act
-        $q = new \App\Domain\Question();
-        $q->setQuestion("Some Other question");
+        $q = new \App\Domain\Question(new \App\Domain\User("Test@Test.com", "Tester 1"), "This is a Question1121", "This is our details");
         //assert
 
-        $this->assertNotEquals($expect,$q->getQuestion());
+        $this->assertNotEquals($expect, $q->getQuestion());
     }
 
     public function testQuestionDetails()
     {
         //arrange
         $expect = "this is the body";
+        $q = new \App\Domain\Question(new \App\Domain\User("Test@Test.com", "Tester 1"), "This is a Question", "this is the body");
 
         //act
-        $q = new \App\Domain\Question();
-        $q->setBody("this is the body");
 
         //assert
-        $this->assertEquals($expect, $q->getBody());
+        $this->assertEquals($expect, $q->getDetails());
     }
 
     public function testQuestionDetailsFails()
@@ -46,11 +43,9 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
         $expect = "this is the body";
 
         //act
-        $q = new \App\Domain\Question();
-        $q->setBody("this is the body 222");
-
+        $q = new \App\Domain\Question(new \App\Domain\User("Test@Test.com", "Tester 1"), "This is a Question", "this is the body222");
         //assert
-        $this->assertNotEquals($expect, $q->getBody());
+        $this->assertNotEquals($expect, $q->getDetails());
     }
 
     public function testQuestionBodyEmptyArgumentsException()
@@ -60,9 +55,8 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
         $expected = "Not a valid Argument";
         // act
         try {
-            $q = new \App\Domain\Question();
-            $q->setBody("");
-        } catch(\Exception $e) {
+            $q = new \App\Domain\Question(new \App\Domain\User("Test@Test.com", "Tester 1"), "test", "");
+        } catch (\Exception $e) {
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
         }
@@ -76,9 +70,8 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
         $expected = "Not a valid Argument";
         // act
         try {
-            $q = new \App\Domain\Question();
-            $q->setQuestion("");
-        } catch(\Exception $e) {
+            $q = new \App\Domain\Question(new \App\Domain\User("Test@Test.com", "Tester 1"), "", "test");
+        } catch (\Exception $e) {
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
         }
@@ -88,85 +81,74 @@ class QuestionTest extends \PHPUnit_Framework_TestCase
 
     public function testQuestionLength()
     {
-	    // arrange
-	    $actual = null;
-	    $expected = "QuestionEloquentModel length is to long";
-	    //act 
-	    try {
-		    $q = new \App\Domain\Question();
-		    $q->setQuestion("This is a very long string of charecters we are making sure when get an exception for the number of random charecters. 11234561231231231212314512312312312351231231235123123512312351231235123123512312354123124123512312351231235123123512312314125123123512312315123123512312351231235123123512312354123123541231254123512");
-
-	    } catch(\Exception $e) {
-		    $actual = $e->getMessage();
-		    $this->assertEquals(\InvalidArgumentException::class, get_class($e));
-	    }
-	    $this->assertEquals($expected, $actual);
+        // arrange
+        $actual = null;
+        $expected = "Question length is to long";
+        $question = "This is a very login string of charectorsd we ewkl;asjdfk;j kldasjfkl;asjkfl; jk; jkd;lfjsak;alsdjkfl;asdjkf; jdf jkdafjkl k;ldanfkl; ankfl;da ji;djf djkakjdk;fjkad;sfjk;alsfjkl;asdfjkl;asdfjkl;asdfjkl;asfjkl;asdfjkal;sdfkl;asdfjkasdfjkalsd;jkl;ldfkldnfals;kdklsdhjkl;fas;kal;kalkajklakl;adklkla;kl;kl;afklakaljl;jkl;ajkasl";
+        //act
+        try {
+            $q = new \App\Domain\Question(new \App\Domain\User("Test@Tests.com", "Tester 1"), $question, "nullBody");
+        } catch (\Exception $e) {
+            $actual = $e->getMessage();
+            $this->assertEquals(\InvalidArgumentException::class, get_class($e));
+        }
+        $this->assertEquals($expected, $actual);
     }
 
 
     public function testQuestionBodyLegth()
     {
-	    //arragne
-	    $actual = null;
-	    $expected = "QuestionEloquentModel body is to long";
-	    //act
-	    try {
-		    $q = new \App\Domain\Question();
-		    $q->setBody("adfadfadfadfadsfjkal;dfjkl;adfjkla;dfjkl;asdjflk;adjfkl;asdfjkla;sfjklas;dfjkl;asfj;klasdfj;lasdjfk;lasdjfkl;asjdfkl;adjkfl;ajfdkl;ajfkl;adjfkl;adfja;
-		    ajdkfl;ajkdlf;ajkdfl;ajsdkfl;ajsdkfl;ajdsfkl;adjfkl;adjfkl;adfjkl;adfjkl;adfjkl;asdfjkl;adfjkl;asdjfkl;adfjkl;dfjkl;adjfkl;adfjkla;fjkadjfk;lafj;lafjkl;ajdfkl;afj
-		    adfjkla;djfkl;asf jkl;dajkl;adshjfk;olasdjfkl;dsjfl;asdjfkl;djfl;kadfkla;sfhksad;fhjkasl;dfjkals;fjkl;asfjkl;asdfjkl;asdjflk;asdflk;asdfkl;djkl;ajkas;kl;sfhkdnf;alsdfkajdsfklajdfkl;ajfdkl;asd
-		    tekal;jfdklajfkdl;ajfkl;dajfkl;ai;lzjkc;jkdjkfl;jfdkl;adjfl;kasjdfkl;afjk;lajfk;lda;l;adfkl;adjfkl;ajdfk;lajkl;jkgl;jkl;l;ajdkflak;dfklasdfjk;ladfjkl;adfk;jkl;jkl;;adfjkl;adfjkl;afdkjl;ajkdf;l
-			jkdlfajkl;dajskfl;jakdsfjlka;dsfjk;ladjfk;ljdktg;jdaks;fjkl;dasfjkl;asdfjkl;adfjkl;adsjtk;lasjdfkl;adjfkl;adjfkl;adjfkl;adnkl;thjdkfjkl;ajklf;dajfkl;adfjkl;asdjfkl;asdfjkadsfjk;adfjk;jaskdf;al
-			dsfjkl;adjfl;asdjfkl;ajtl/zt;yadjkl;afdk;lal;ksdfjkl;adfhki;adshfkj;asjhfkl;asfjksla;dfjkl;sadfjkl;sadjfkl;dfkhkadsl;htkasdrjtkl;ajfdlk;jdkl;jfk;ladfjk;ladfhkl;afhkds;afjk;lafjka;sthkd;ajf;da;");
-	
-	    } catch (\Exception $e) {
-		    $actual = $e->getMessage();
-		    $this->assertEquals(\InvalidArgumentException::class, get_class($e));
-	    }
-	    $this->assertEquals($expected,$actual);
+        //arragne
+        $actual = null;
+        $expected = "Question body is to long";
+        $body = 'This is a very logn string so long it takes for ever to wright a body longer than 2000 chars                                                                                                                                                                          1231                                                                                                                                                                                  1231                                                                                                                                                                                     1231                                                                                                                                                                                 1231                                                                                                                                                                                      12312                                                                                                                                                                                123123                                                                                                                                                                                 12312                                                                                                                                                                                  12312                                                                                                                                                                               1231                                                                                                                                                                                                                                                                                     1231231 end of line';
+        //act
+        try {
+            $q = new \App\Domain\Question(new \App\Domain\User('Some@Some.com', "Test this shit"), "null question", $body);
+        } catch (\Exception $e) {
+            $actual = $e->getMessage();
+            $this->assertEquals(\InvalidArgumentException::class, get_class($e));
+        }
+        $this->assertEquals($expected, $actual);
     }
 
     public function testQuestionUser()
     {
-	//arrange
-	$u = new \App\Domain\User('some@email.com','Pass1234');
-	$q = new \App\Domain\Question();
-	$expected = 'some@email.com';
-	//act
-	$q->setUser($u);
-	$actual = $q->getUser();
-	//assert
-	$this->assertEquals($expected,$actual->getEmail());
-
+    //arrange
+        $u = new \App\Domain\User('some@email.com', 'Pass1234');
+        $q = new \App\Domain\Question($u, 'Test', 'Test');
+        $expected = 'some@email.com';
+    //act
+        $actual = $q->getUser();
+    //assert
+        $this->assertEquals($expected, $actual->getEmail());
     }
     public function testQuestionNumber()
     {
-	//arragne
-	$expect = "Argument is not a string";
-	$actual = null;
-	//act
-	try {
-		$q = new \App\Domain\Question();
-		$q->setQuestion(1);
-	} catch (\Exception $e) {
-		$actual = $e->getMessage();
-		$this->assertEquals(\InvalidArgumentException::class, get_class($e));
-	}
-	$this->assertEquals($expect,$actual);
+    //arragne
+        $expect = "Argument is not a string";
+        $actual = null;
+    //act
+        try {
+            $q = new \App\Domain\Question(new \App\Domain\User("Test@test.com", "Tester 1"), 1, "test");
+        } catch (\Exception $e) {
+            $actual = $e->getMessage();
+            $this->assertEquals(\InvalidArgumentException::class, get_class($e));
+        }
+        $this->assertEquals($expect, $actual);
     }
     public function testQuestionBodyNumber()
     {
-	//arragne
-	$expect = "Argument is not a string";
-	$actual = null;
-	//act
-	try {
-		$q = new \App\Domain\Question();
-		$q->setBody(1);
-	} catch (\Exception $e) {
-		$actual = $e->getMessage();
-		$this->assertEquals(\InvalidArgumentException::class, get_class($e));
-	}
-	$this->assertEquals($expect,$actual);
+    //arragne
+        $expect = "Argument is not a string";
+        $actual = null;
+    //act
+        try {
+            $q = new \App\Domain\Question(new \App\Domain\User("Test@test.com", "Tester 1"), "test", 1);
+        } catch (\Exception $e) {
+            $actual = $e->getMessage();
+            $this->assertEquals(\InvalidArgumentException::class, get_class($e));
+        }
+        $this->assertEquals($expect, $actual);
     }
 }

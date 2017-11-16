@@ -16,6 +16,3 @@ $app->get('/question/ask', App\Actions\QuestionActions::class)->setName('Questio
 $app->post('/profile', App\Actions\ProfileAction::class)->setName('ProfilePage');
 $app->post('/registration', App\Actions\ReisterAction::class)->setName('PostRegistrationPage');
 $app->post('/question', App\Actions\QuestionsActions::class)->setName('QuestionsPage');
-
-
-
