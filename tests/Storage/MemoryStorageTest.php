@@ -1,6 +1,6 @@
 <?php
-
-class MemoryStorageTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+class MemoryStorageTest extends TestCase
 {
     public function testMemoryStorageConstructor()
     {
@@ -26,65 +26,76 @@ class MemoryStorageTest extends \PHPUnit_Framework_TestCase
         $memory = new \App\Storage\MemoryStorage();
 
         $memory->Insert(1);
-
+        $expect = null;
         $actual = $memory->Get(1);
+        $this->assertEquals($expect, $actual);
     }
 
     public function testMemoryStorageMoreThanOneItem()
     {
-	$memory = new \App\Storage\MemoryStorage();
-	$u = new \App\Domain\User("this@email.com","tester 1");
-	$q = new \App\Domain\Question($u,"Subject","This is my problem can I get some help Thanks");
+        $memory = new \App\Storage\MemoryStorage();
+        $u = new \App\Domain\User("this@email.com", "tester 1");
+        $q = new \App\Domain\Question($u, "Subject", "This is my problem can I get some help Thanks");
 
-	$memory->Insert($u);
-	$memory->Insert($q);
+        $memory->Insert($u);
+        $memory->Insert($q);
 
-	$expectedCount = 2;
-	$this->assertEquals($expectedCount, $memory->count());
-	$expected = $u;
+        $expectedCount = 2;
+        $this->assertEquals($expectedCount, $memory->count());
+        $expected = $u;
 
-	$result = $memory->Get($u->getID());
+        $result = $memory->Get($u->getID());
 
-	$this->assertEquals($expected,$result);	    
+        $this->assertEquals($expected, $result);
     }
 
     public function testMemoryStroageRemove()
     {
-	    $u = new \App\Domain\User("this@email.com","tester 1");
+        $u = new \App\Domain\User("this@email.com", "tester 1");
 
-	    $id = $u->getID();
+        $id = $u->getID();
 
-	    $memory = new \App\Storage\MemoryStorage();
-	    $memory->Insert($u);
+        $memory = new \App\Storage\MemoryStorage();
+        $memory->Insert($u);
 
-	    $this->assertEquals(1,$memory->count());
+        $this->assertEquals(1, $memory->count());
 
-	    $memory->Remove($id);
+        $memory->Remove($id);
 
-	    $this->assertEquals(0,$memory->count());
+        $this->assertEquals(0, $memory->count());
     }
 
-    public function testMemoryStorageRemoveAll() {
-	    $memory = new \App\Storage\MemoryStorage();
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
+    public function testMemoryStorageRemoveAll()
+    {
+        $memory = new \App\Storage\MemoryStorage();
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
 
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
-	    $memory->Insert(new \App\Domain\User("thisis@a.test","Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
+        $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
 
-	    $this->assertEquals(13,$memory->count());
+        $this->assertEquals(13, $memory->count());
 
-	    $memory->RemoveAll();
+        $memory->RemoveAll();
 
-	    $this->assertEquals(0,$memory->count());
+        $this->assertEquals(0, $memory->count());
+    }
+    public function testMemoryStroageString()
+    {
+        $memory = new \App\Storage\MemoryStorage();
+        $string = " This is a random string";
+        $memory->Insert($string);
+        $expect = null;
+        $actual = $memory->Get($string);
+        $this->assertEquals($expect, $actual);
     }
 }

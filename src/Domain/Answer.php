@@ -12,19 +12,16 @@ class Answer
     protected $questionID;
     protected $createdDate;
     protected $modifiedDate;
-    protected $uuid;
 
-    public function __construct()
+    public function __construct(\App\Domain\User $user, $answer, $questionID)
     {
-        $this->uuid = uniqid("anw_");
+        $this->ID = uniqid("anw_");
+        $this->questionID = $questionID;
         $this->createdDate = date('Y-m-d H:i:s');
+        $this->modifiedDate = date('Y-m-d H:i:s');
         $this->upvote = 0;
-    }
-
-    public function setUser(\App\Domain\User $u)
-    {
-        $this->user = $u;
-        return $this;
+        $this->user = $user;
+        $this->setAnswer($answer);
     }
 
     public function getUser()
@@ -32,7 +29,7 @@ class Answer
         return $this->user;
     }
 
-    public function setAnswer($string)
+    protected function setAnswer($string)
     {
 
         if (empty($string)) {
@@ -61,7 +58,7 @@ class Answer
         $this->upvote++;
     }
 
-    public function setUpvote($int)
+    protected function setUpvote($int)
     {
         $this->upvote = $int;
         return $this;
@@ -75,5 +72,10 @@ class Answer
     public function getCreationDate()
     {
         return $this->createdDate;
+    }
+
+    public function getModifiedDate()
+    {
+        return $this->modifiedDate;
     }
 }

@@ -13,7 +13,9 @@ class MemoryStorage implements AdapterInterface
 
     public function Insert($item)
     {
-        $this->array[] = $item;
+        if (is_object($item)) {
+            $this->array[] = $item;
+        }
         return $this;
     }
 
@@ -39,6 +41,9 @@ class MemoryStorage implements AdapterInterface
     public function Get($id)
     {
         $offset = $this->iterate($id);
+        if ($offset === -1) {
+            return null;
+        }
         return $this->array[$offset];
     }
 

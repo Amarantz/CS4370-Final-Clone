@@ -1,16 +1,16 @@
 <?php
+use PHPUnit\Framework\TestCase;
 
-class AnswersTest extends \PHPUnit_Framework_TestCase
+class AnswersTest extends TestCase
 {
-    public function testAwnserUser()
+    public function testAnswerUser()
     {
         //arrange
-        $u = new \App\Domain\User("some@email.com", "anna able");
-        $a = new \App\Domain\Answer();
+	$u = new \App\Domain\User("some@email.com", "anna able");
+	$a = new \App\Domain\Answer($u,"This is an Answer","QUE_15123123");
         //act
         $expect = "some@email.com";
 
-        $a->setUser($u);
         $actual = $a->getUser();
 
         $this->assertEquals($expect, $actual->getEmail());
@@ -19,9 +19,9 @@ class AnswersTest extends \PHPUnit_Framework_TestCase
     public function testAwnserBody()
     {
         $message = "We have an awnser that we can anwser with in a short amount of characters";
-        $a = new \App\Domain\Answer();
+        $u = new \App\Domain\User("some@email.com", "anna able");
+        $a = new \App\Domain\Answer($u,$message,"QUE_15123123");
         //act
-        $a->setAnswer($message);
         $actual = $a->getAnswer();
 
         $this->assertEquals($message, $actual);
@@ -33,8 +33,8 @@ class AnswersTest extends \PHPUnit_Framework_TestCase
         $expect = "Argument is not a string";
 
         try {
-            $a = new \App\Domain\Answer();
-            $a->setAnswer(1);
+                $u = new \App\Domain\User("some@email.com", "anna able");
+        	$a = new \App\Domain\Answer($u,1,"QUE_15123123");
         } catch (\Exception $e) {
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
@@ -49,8 +49,8 @@ class AnswersTest extends \PHPUnit_Framework_TestCase
         $expect = "Argument is empty";
 
         try {
-            $a = new \App\Domain\Answer();
-            $a->setAnswer("");
+            $u = new \App\Domain\User("some@email.com", "anna able");
+            $a = new \App\Domain\Answer($u,"","QUE_15123123");
         } catch (\Exception $e) {
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
@@ -63,7 +63,8 @@ class AnswersTest extends \PHPUnit_Framework_TestCase
     {
         $expect = 1;
 
-        $a = new \App\Domain\Answer();
+        $u = new \App\Domain\User("some@email.com", "anna able");
+        $a = new \App\Domain\Answer($u,"This is an Answer","QUE_15123123");
 
         $a->upvote();
 
@@ -74,10 +75,10 @@ class AnswersTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAnswerUpvote()
     {
-        $expect = 13;
+        $expect = 1;
 
-        $a = new \App\Domain\Answer();
-        $a->setUpvote(12);
+        $u = new \App\Domain\User("some@email.com", "anna able");
+        $a = new \App\Domain\Answer($u,"This is an Answer","QUE_15123123");
 
         $actual = $a->getUpvote();
         $this->assertEquals($expect-1, $actual);
@@ -91,7 +92,8 @@ class AnswersTest extends \PHPUnit_Framework_TestCase
     {
         $expect = date("Y-m-d H:i:s");
 
-        $a = new \App\Domain\Answer();
+        $u = new \App\Domain\User("some@email.com", "anna able");
+        $a = new \App\Domain\Answer($u,"This is an Answer","QUE_15123123");
         $actual = $a->getCreationDate();
 
         $this->assertTrue(!empty($actual));
