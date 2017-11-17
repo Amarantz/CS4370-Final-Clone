@@ -17,66 +17,81 @@
 <path fill="none" stroke="gray" d="M108.084,-52C108.084,-52 603.167,-52 603.167,-52 609.167,-52 615.167,-58 615.167,-64 615.167,-64 615.167,-658 615.167,-658 615.167,-664 609.167,-670 603.167,-670 603.167,-670 108.084,-670 108.084,-670 102.084,-670 96.0836,-664 96.0836,-658 96.0836,-658 96.0836,-64 96.0836,-64 96.0836,-58 102.084,-52 108.084,-52"/>
 <text text-anchor="middle" x="355.625" y="-657.2" font-family="Times,serif" font-size="11.00" fill="gray">App</text>
 </g>
-<g id="clust3" class="cluster"><title>cluster_\App\Actions</title>
-<path fill="none" stroke="gray" d="M472.167,-516C472.167,-516 568.167,-516 568.167,-516 574.167,-516 580.167,-522 580.167,-528 580.167,-528 580.167,-630 580.167,-630 580.167,-636 574.167,-642 568.167,-642 568.167,-642 472.167,-642 472.167,-642 466.167,-642 460.167,-636 460.167,-630 460.167,-630 460.167,-528 460.167,-528 460.167,-522 466.167,-516 472.167,-516"/>
-<text text-anchor="middle" x="520.167" y="-629.2" font-family="Times,serif" font-size="11.00" fill="gray">Actions</text>
+<g id="clust3" class="cluster"><title>cluster_\App\Storage</title>
+<path fill="none" stroke="gray" d="M116.084,-516C116.084,-516 571.667,-516 571.667,-516 577.667,-516 583.667,-522 583.667,-528 583.667,-528 583.667,-630 583.667,-630 583.667,-636 577.667,-642 571.667,-642 571.667,-642 116.084,-642 116.084,-642 110.084,-642 104.084,-636 104.084,-630 104.084,-630 104.084,-528 104.084,-528 104.084,-522 110.084,-516 116.084,-516"/>
+<text text-anchor="middle" x="343.875" y="-629.2" font-family="Times,serif" font-size="11.00" fill="gray">Storage</text>
 </g>
-<g id="clust4" class="cluster"><title>cluster_\App\Storage</title>
-<path fill="none" stroke="gray" d="M116.084,-382C116.084,-382 571.667,-382 571.667,-382 577.667,-382 583.667,-388 583.667,-394 583.667,-394 583.667,-496 583.667,-496 583.667,-502 577.667,-508 571.667,-508 571.667,-508 116.084,-508 116.084,-508 110.084,-508 104.084,-502 104.084,-496 104.084,-496 104.084,-394 104.084,-394 104.084,-388 110.084,-382 116.084,-382"/>
-<text text-anchor="middle" x="343.875" y="-495.2" font-family="Times,serif" font-size="11.00" fill="gray">Storage</text>
+<g id="clust4" class="cluster"><title>cluster_\App\Domain</title>
+<path fill="none" stroke="gray" d="M488.667,-328C488.667,-328 551.667,-328 551.667,-328 557.667,-328 563.667,-334 563.667,-340 563.667,-340 563.667,-496 563.667,-496 563.667,-502 557.667,-508 551.667,-508 551.667,-508 488.667,-508 488.667,-508 482.667,-508 476.667,-502 476.667,-496 476.667,-496 476.667,-340 476.667,-340 476.667,-334 482.667,-328 488.667,-328"/>
+<text text-anchor="middle" x="520.167" y="-495.2" font-family="Times,serif" font-size="11.00" fill="gray">Domain</text>
 </g>
-<g id="clust5" class="cluster"><title>cluster_\App\Models</title>
-<path fill="none" stroke="gray" d="M445.167,-248C445.167,-248 595.167,-248 595.167,-248 601.167,-248 607.167,-254 607.167,-260 607.167,-260 607.167,-362 607.167,-362 607.167,-368 601.167,-374 595.167,-374 595.167,-374 445.167,-374 445.167,-374 439.167,-374 433.167,-368 433.167,-362 433.167,-362 433.167,-260 433.167,-260 433.167,-254 439.167,-248 445.167,-248"/>
-<text text-anchor="middle" x="520.167" y="-361.2" font-family="Times,serif" font-size="11.00" fill="gray">Models</text>
+<g id="clust5" class="cluster"><title>cluster_\App\Actions</title>
+<path fill="none" stroke="gray" d="M472.167,-194C472.167,-194 568.167,-194 568.167,-194 574.167,-194 580.167,-200 580.167,-206 580.167,-206 580.167,-308 580.167,-308 580.167,-314 574.167,-320 568.167,-320 568.167,-320 472.167,-320 472.167,-320 466.167,-320 460.167,-314 460.167,-308 460.167,-308 460.167,-206 460.167,-206 460.167,-200 466.167,-194 472.167,-194"/>
+<text text-anchor="middle" x="520.167" y="-307.2" font-family="Times,serif" font-size="11.00" fill="gray">Actions</text>
 </g>
-<g id="clust6" class="cluster"><title>cluster_\App\Domain</title>
-<path fill="none" stroke="gray" d="M488.667,-60C488.667,-60 551.667,-60 551.667,-60 557.667,-60 563.667,-66 563.667,-72 563.667,-72 563.667,-228 563.667,-228 563.667,-234 557.667,-240 551.667,-240 551.667,-240 488.667,-240 488.667,-240 482.667,-240 476.667,-234 476.667,-228 476.667,-228 476.667,-72 476.667,-72 476.667,-66 482.667,-60 488.667,-60"/>
-<text text-anchor="middle" x="520.167" y="-227.2" font-family="Times,serif" font-size="11.00" fill="gray">Domain</text>
-</g>
-<!-- \\App\\Actions\\HomeAction -->
-<g id="node1" class="node"><title>\\App\\Actions\\HomeAction</title>
-<polygon fill="none" stroke="black" points="562.167,-614 478.167,-614 478.167,-578 562.167,-578 562.167,-614"/>
-<text text-anchor="middle" x="520.167" y="-593.2" font-family="Courier,monospace" font-size="11.00">HomeAction</text>
-</g>
-<!-- \\App\\Actions\\ProfileAction -->
-<g id="node2" class="node"><title>\\App\\Actions\\ProfileAction</title>
-<polygon fill="none" stroke="black" points="572.167,-560 468.167,-560 468.167,-524 572.167,-524 572.167,-560"/>
-<text text-anchor="middle" x="520.167" y="-539.2" font-family="Courier,monospace" font-size="11.00">ProfileAction</text>
+<g id="clust6" class="cluster"><title>cluster_\App\Models</title>
+<path fill="none" stroke="gray" d="M445.167,-60C445.167,-60 595.167,-60 595.167,-60 601.167,-60 607.167,-66 607.167,-72 607.167,-72 607.167,-174 607.167,-174 607.167,-180 601.167,-186 595.167,-186 595.167,-186 445.167,-186 445.167,-186 439.167,-186 433.167,-180 433.167,-174 433.167,-174 433.167,-72 433.167,-72 433.167,-66 439.167,-60 445.167,-60"/>
+<text text-anchor="middle" x="520.167" y="-173.2" font-family="Times,serif" font-size="11.00" fill="gray">Models</text>
 </g>
 <!-- \\App\\Storage\\MemoryStorage -->
-<g id="node3" class="node"><title>\\App\\Storage\\MemoryStorage</title>
-<polygon fill="none" stroke="black" points="572.167,-480 468.167,-480 468.167,-444 572.167,-444 572.167,-480"/>
-<text text-anchor="middle" x="520.167" y="-459.2" font-family="Courier,monospace" font-size="11.00">MemoryStorage</text>
+<g id="node1" class="node"><title>\\App\\Storage\\MemoryStorage</title>
+<polygon fill="none" stroke="black" points="572.167,-614 468.167,-614 468.167,-578 572.167,-578 572.167,-614"/>
+<text text-anchor="middle" x="520.167" y="-593.2" font-family="Courier,monospace" font-size="11.00">MemoryStorage</text>
 </g>
 <!-- \\App\\Storage\\AdapterInterface -->
-<g id="node5" class="node"><title>\\App\\Storage\\AdapterInterface</title>
-<polygon fill="none" stroke="black" points="247.084,-480 122.084,-480 122.084,-444 247.084,-444 247.084,-480"/>
-<text text-anchor="middle" x="184.584" y="-459.2" font-family="Courier,monospace" font-size="11.00">AdapterInterface</text>
+<g id="node3" class="node"><title>\\App\\Storage\\AdapterInterface</title>
+<polygon fill="none" stroke="black" points="247.084,-614 122.084,-614 122.084,-578 247.084,-578 247.084,-614"/>
+<text text-anchor="middle" x="184.584" y="-593.2" font-family="Courier,monospace" font-size="11.00">AdapterInterface</text>
 </g>
 <!-- \\App\\Storage\\MemoryStorage&#45;&gt;\\App\\Storage\\AdapterInterface -->
 <g id="edge1" class="edge"><title>\\App\\Storage\\MemoryStorage&#45;&gt;\\App\\Storage\\AdapterInterface</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M468.14,-462C411.865,-462 320.896,-462 257.429,-462"/>
-<polygon fill="none" stroke="black" points="257.096,-458.5 247.096,-462 257.096,-465.5 257.096,-458.5"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M468.14,-596C411.865,-596 320.896,-596 257.429,-596"/>
+<polygon fill="none" stroke="black" points="257.096,-592.5 247.096,-596 257.096,-599.5 257.096,-592.5"/>
 </g>
 <!-- \\App\\Storage\\UserRepository -->
-<g id="node4" class="node"><title>\\App\\Storage\\UserRepository</title>
-<polygon fill="none" stroke="black" points="575.667,-426 464.667,-426 464.667,-390 575.667,-390 575.667,-426"/>
-<text text-anchor="middle" x="520.167" y="-405.2" font-family="Courier,monospace" font-size="11.00">UserRepository</text>
+<g id="node2" class="node"><title>\\App\\Storage\\UserRepository</title>
+<polygon fill="none" stroke="black" points="575.667,-560 464.667,-560 464.667,-524 575.667,-524 575.667,-560"/>
+<text text-anchor="middle" x="520.167" y="-539.2" font-family="Courier,monospace" font-size="11.00">UserRepository</text>
 </g>
 <!-- \\App\\Storage\\RepositoryInterface -->
-<g id="node6" class="node"><title>\\App\\Storage\\RepositoryInterface</title>
-<polygon fill="none" stroke="black" points="257.084,-426 112.084,-426 112.084,-390 257.084,-390 257.084,-426"/>
-<text text-anchor="middle" x="184.584" y="-405.2" font-family="Courier,monospace" font-size="11.00">RepositoryInterface</text>
+<g id="node4" class="node"><title>\\App\\Storage\\RepositoryInterface</title>
+<polygon fill="none" stroke="black" points="257.084,-560 112.084,-560 112.084,-524 257.084,-524 257.084,-560"/>
+<text text-anchor="middle" x="184.584" y="-539.2" font-family="Courier,monospace" font-size="11.00">RepositoryInterface</text>
 </g>
 <!-- \\App\\Storage\\UserRepository&#45;&gt;\\App\\Storage\\RepositoryInterface -->
 <g id="edge2" class="edge"><title>\\App\\Storage\\UserRepository&#45;&gt;\\App\\Storage\\RepositoryInterface</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M464.456,-408C410.879,-408 328.583,-408 267.259,-408"/>
-<polygon fill="none" stroke="black" points="267.221,-404.5 257.221,-408 267.221,-411.5 267.221,-404.5"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M464.456,-542C410.879,-542 328.583,-542 267.259,-542"/>
+<polygon fill="none" stroke="black" points="267.221,-538.5 257.221,-542 267.221,-545.5 267.221,-538.5"/>
+</g>
+<!-- \\App\\Domain\\Answer -->
+<g id="node5" class="node"><title>\\App\\Domain\\Answer</title>
+<polygon fill="none" stroke="black" points="548.667,-480 491.667,-480 491.667,-444 548.667,-444 548.667,-480"/>
+<text text-anchor="middle" x="520.167" y="-459.2" font-family="Courier,monospace" font-size="11.00">Answer</text>
+</g>
+<!-- \\App\\Domain\\Question -->
+<g id="node6" class="node"><title>\\App\\Domain\\Question</title>
+<polygon fill="none" stroke="black" points="555.667,-426 484.667,-426 484.667,-390 555.667,-390 555.667,-426"/>
+<text text-anchor="middle" x="520.167" y="-405.2" font-family="Courier,monospace" font-size="11.00">Question</text>
+</g>
+<!-- \\App\\Domain\\User -->
+<g id="node7" class="node"><title>\\App\\Domain\\User</title>
+<polygon fill="none" stroke="black" points="547.167,-372 493.167,-372 493.167,-336 547.167,-336 547.167,-372"/>
+<text text-anchor="middle" x="520.167" y="-351.2" font-family="Courier,monospace" font-size="11.00">User</text>
+</g>
+<!-- \\App\\Actions\\ProfileAction -->
+<g id="node8" class="node"><title>\\App\\Actions\\ProfileAction</title>
+<polygon fill="none" stroke="black" points="572.167,-292 468.167,-292 468.167,-256 572.167,-256 572.167,-292"/>
+<text text-anchor="middle" x="520.167" y="-271.2" font-family="Courier,monospace" font-size="11.00">ProfileAction</text>
+</g>
+<!-- \\App\\Actions\\HomeAction -->
+<g id="node9" class="node"><title>\\App\\Actions\\HomeAction</title>
+<polygon fill="none" stroke="black" points="562.167,-238 478.167,-238 478.167,-202 562.167,-202 562.167,-238"/>
+<text text-anchor="middle" x="520.167" y="-217.2" font-family="Courier,monospace" font-size="11.00">HomeAction</text>
 </g>
 <!-- \\App\\Models\\UserEloquentModel -->
-<g id="node7" class="node"><title>\\App\\Models\\UserEloquentModel</title>
-<polygon fill="none" stroke="black" points="585.667,-346 454.667,-346 454.667,-310 585.667,-310 585.667,-346"/>
-<text text-anchor="middle" x="520.167" y="-325.2" font-family="Courier,monospace" font-size="11.00">UserEloquentModel</text>
+<g id="node10" class="node"><title>\\App\\Models\\UserEloquentModel</title>
+<polygon fill="none" stroke="black" points="585.667,-158 454.667,-158 454.667,-122 585.667,-122 585.667,-158"/>
+<text text-anchor="middle" x="520.167" y="-137.2" font-family="Courier,monospace" font-size="11.00">UserEloquentModel</text>
 </g>
 <!-- \\Illuminate\\Database\\Eloquent\\Model -->
 <g id="node12" class="node"><title>\\Illuminate\\Database\\Eloquent\\Model</title>
@@ -85,33 +100,18 @@
 </g>
 <!-- \\App\\Models\\UserEloquentModel&#45;&gt;\\Illuminate\\Database\\Eloquent\\Model -->
 <g id="edge3" class="edge"><title>\\App\\Models\\UserEloquentModel&#45;&gt;\\Illuminate\\Database\\Eloquent\\Model</title>
-<path fill="none" stroke="black" d="M454.457,-311.994C446.994,-308.911 439.72,-305.276 433.167,-301 325.448,-230.713 236.881,-100.98 201.795,-44.9417"/>
-<polygon fill="none" stroke="black" points="204.679,-42.9504 196.438,-36.291 198.727,-46.6356 204.679,-42.9504"/>
+<path fill="none" stroke="black" d="M459.792,-121.89C450.84,-119.006 441.738,-115.987 433.167,-113 365.368,-89.3752 288.295,-59.2796 238.407,-39.364"/>
+<polygon fill="none" stroke="black" points="239.694,-36.1094 229.11,-35.6447 237.094,-42.6087 239.694,-36.1094"/>
 </g>
 <!-- \\App\\Models\\QuestionEloquentModel -->
-<g id="node8" class="node"><title>\\App\\Models\\QuestionEloquentModel</title>
-<polygon fill="none" stroke="black" points="599.167,-292 441.167,-292 441.167,-256 599.167,-256 599.167,-292"/>
-<text text-anchor="middle" x="520.167" y="-271.2" font-family="Courier,monospace" font-size="11.00">QuestionEloquentModel</text>
+<g id="node11" class="node"><title>\\App\\Models\\QuestionEloquentModel</title>
+<polygon fill="none" stroke="black" points="599.167,-104 441.167,-104 441.167,-68 599.167,-68 599.167,-104"/>
+<text text-anchor="middle" x="520.167" y="-83.2" font-family="Courier,monospace" font-size="11.00">QuestionEloquentModel</text>
 </g>
 <!-- \\App\\Models\\QuestionEloquentModel&#45;&gt;\\Illuminate\\Database\\Eloquent\\Model -->
 <g id="edge4" class="edge"><title>\\App\\Models\\QuestionEloquentModel&#45;&gt;\\Illuminate\\Database\\Eloquent\\Model</title>
-<path fill="none" stroke="black" d="M457.639,-255.984C449.166,-252.523 440.773,-248.536 433.167,-244 338.153,-187.337 247.736,-90.2171 207.474,-43.9622"/>
-<polygon fill="none" stroke="black" points="209.958,-41.4834 200.775,-36.2004 204.659,-46.0574 209.958,-41.4834"/>
-</g>
-<!-- \\App\\Domain\\User -->
-<g id="node9" class="node"><title>\\App\\Domain\\User</title>
-<polygon fill="none" stroke="black" points="547.167,-212 493.167,-212 493.167,-176 547.167,-176 547.167,-212"/>
-<text text-anchor="middle" x="520.167" y="-191.2" font-family="Courier,monospace" font-size="11.00">User</text>
-</g>
-<!-- \\App\\Domain\\Answer -->
-<g id="node10" class="node"><title>\\App\\Domain\\Answer</title>
-<polygon fill="none" stroke="black" points="548.667,-158 491.667,-158 491.667,-122 548.667,-122 548.667,-158"/>
-<text text-anchor="middle" x="520.167" y="-137.2" font-family="Courier,monospace" font-size="11.00">Answer</text>
-</g>
-<!-- \\App\\Domain\\Question -->
-<g id="node11" class="node"><title>\\App\\Domain\\Question</title>
-<polygon fill="none" stroke="black" points="555.667,-104 484.667,-104 484.667,-68 555.667,-68 555.667,-104"/>
-<text text-anchor="middle" x="520.167" y="-83.2" font-family="Courier,monospace" font-size="11.00">Question</text>
+<path fill="none" stroke="black" d="M440.957,-70.057C391.296,-59.9338 326.876,-46.8021 275.163,-36.2605"/>
+<polygon fill="none" stroke="black" points="275.828,-32.8241 265.33,-34.2561 274.43,-39.6831 275.828,-32.8241"/>
 </g>
 </g>
 </svg>

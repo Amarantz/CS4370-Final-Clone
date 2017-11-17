@@ -6,8 +6,8 @@ class AnswersTest extends TestCase
     public function testAnswerUser()
     {
         //arrange
-	$u = new \App\Domain\User("some@email.com", "anna able");
-	$a = new \App\Domain\Answer($u,"This is an Answer","QUE_15123123");
+        $u = new \App\Domain\User("some@email.com", "anna able");
+        $a = new \App\Domain\Answer($u, "This is an Answer", "QUE_15123123");
         //act
         $expect = "some@email.com";
 
@@ -20,7 +20,7 @@ class AnswersTest extends TestCase
     {
         $message = "We have an awnser that we can anwser with in a short amount of characters";
         $u = new \App\Domain\User("some@email.com", "anna able");
-        $a = new \App\Domain\Answer($u,$message,"QUE_15123123");
+        $a = new \App\Domain\Answer($u, $message, "QUE_15123123");
         //act
         $actual = $a->getAnswer();
 
@@ -34,7 +34,7 @@ class AnswersTest extends TestCase
 
         try {
                 $u = new \App\Domain\User("some@email.com", "anna able");
-        	$a = new \App\Domain\Answer($u,1,"QUE_15123123");
+            $a = new \App\Domain\Answer($u, 1, "QUE_15123123");
         } catch (\Exception $e) {
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
@@ -50,7 +50,7 @@ class AnswersTest extends TestCase
 
         try {
             $u = new \App\Domain\User("some@email.com", "anna able");
-            $a = new \App\Domain\Answer($u,"","QUE_15123123");
+            $a = new \App\Domain\Answer($u, "", "QUE_15123123");
         } catch (\Exception $e) {
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
@@ -64,7 +64,7 @@ class AnswersTest extends TestCase
         $expect = 1;
 
         $u = new \App\Domain\User("some@email.com", "anna able");
-        $a = new \App\Domain\Answer($u,"This is an Answer","QUE_15123123");
+        $a = new \App\Domain\Answer($u, "This is an Answer", "QUE_15123123");
 
         $a->upvote();
 
@@ -78,7 +78,7 @@ class AnswersTest extends TestCase
         $expect = 1;
 
         $u = new \App\Domain\User("some@email.com", "anna able");
-        $a = new \App\Domain\Answer($u,"This is an Answer","QUE_15123123");
+        $a = new \App\Domain\Answer($u, "This is an Answer", "QUE_15123123");
 
         $actual = $a->getUpvote();
         $this->assertEquals($expect-1, $actual);
@@ -93,7 +93,7 @@ class AnswersTest extends TestCase
         $expect = date("Y-m-d H:i:s");
 
         $u = new \App\Domain\User("some@email.com", "anna able");
-        $a = new \App\Domain\Answer($u,"This is an Answer","QUE_15123123");
+        $a = new \App\Domain\Answer($u, "This is an Answer", "QUE_15123123");
         $actual = $a->getCreationDate();
 
         $this->assertTrue(!empty($actual));

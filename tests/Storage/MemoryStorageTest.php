@@ -1,5 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
+
 class MemoryStorageTest extends TestCase
 {
     public function testMemoryStorageConstructor()
