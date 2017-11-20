@@ -114,7 +114,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">135</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">130</span>
                                 </a>
                             </li>
                             <li>
@@ -144,28 +144,28 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-559409657"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-943802689"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-559409657" class="accordion-body collapse in">
+            <div id="namespace-943802689" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2032048137"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-695779251"></a>
                                 <a href="../namespaces/App.html" style="margin-left: 30px; padding-left: 0">App</a>
             </div>
-            <div id="namespace-2032048137" class="accordion-body collapse ">
+            <div id="namespace-695779251" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1621276099"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-442502195"></a>
                                 <a href="../namespaces/App.Actions.html" style="margin-left: 30px; padding-left: 0">Actions</a>
             </div>
-            <div id="namespace-1621276099" class="accordion-body collapse ">
+            <div id="namespace-442502195" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -181,10 +181,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-948385944"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1590516806"></a>
                                 <a href="../namespaces/App.Domain.html" style="margin-left: 30px; padding-left: 0">Domain</a>
             </div>
-            <div id="namespace-948385944" class="accordion-body collapse ">
+            <div id="namespace-1590516806" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -201,10 +201,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1406996911"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2146778822"></a>
                                 <a href="../namespaces/App.Models.html" style="margin-left: 30px; padding-left: 0">Models</a>
             </div>
-            <div id="namespace-1406996911" class="accordion-body collapse ">
+            <div id="namespace-2146778822" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -220,10 +220,10 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1494861383"></a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1947303212"></a>
                                 <a href="../namespaces/App.Storage.html" style="margin-left: 30px; padding-left: 0">Storage</a>
             </div>
-            <div id="namespace-1494861383" class="accordion-body collapse ">
+            <div id="namespace-1947303212" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
@@ -266,7 +266,8 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\App\Domain</small>Question</h1>
-                    <p><em></em></p>
+                    <p><em>Question Concrete class. This is how a question is created when generate in the system. Question Summry or statement has limitation 256 car
+cahrectors.  and the details of teh question are limited to 1000 carectors.</em></p>
                     
                     
                                         
@@ -520,8 +521,9 @@
             <article class="method">
                 <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(\App\Domain\User  <span class="argument">$user</span>,   <span class="argument">$question</span>,   <span class="argument">$details</span>) </pre>
-                <p><em></em></p>
+                <pre class="signature" style="margin-right: 54px;">__construct(\App\Domain\User  <span class="argument">$user</span>, string  <span class="argument">$question</span>, string  <span class="argument">$details</span>) </pre>
+                <p><em>Constructor for the Question class. Which generates a UUID Creation date and last modified dates with
+the reqirements of user $question and details</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -532,12 +534,12 @@
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$question </td>
                                 <td></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$details </td>
                                 <td></td>
                             </tr>
@@ -814,7 +816,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 17th, 2017 at 23:53.
+                    on November 20th, 2017 at 22:21.
                 </section>
             </section>
         </section>
