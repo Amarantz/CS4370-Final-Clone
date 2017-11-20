@@ -8,45 +8,45 @@ namespace App\Domain;
 
 /**
  * Question Concrete class. This is how a question is created when generate in the system. Question Summry or statement has limitation 256 car
- * cahrectors.  and the details of teh question are limited to 1000 carectors. 
+ * cahrectors.  and the details of teh question are limited to 1000 carectors.
  *
  */
 
 class Question
 {
-	/*
+    /*
 	 * @var $ID - This is the uninque ID that is generated when the class is created. 
 	 */
-	protected $ID;
-	/*
+    protected $ID;
+    /*
 	 * @var $question - this is the statment or question being asked.
 	 */
-	protected $question;
-	/*
+    protected $question;
+    /*
 	 * @var $details  - This is the complete details or description of the question;
 	 */
-	protected $details;
-	/*
+    protected $details;
+    /*
 		* @var User - @link \App\Domain\User  This is the user associated with the message
 	 */
-	protected $user;
-	/*
+    protected $user;
+    /*
 		* @var $updateDate - This is the modified date of the quetion if it has been editied. 
 	 */
-	protected $updatedDate;
-	/*
+    protected $updatedDate;
+    /*
 		* @var createionDate - This is the date the question was created;
 	 */
     protected $creationDate;
 
-	/**
-	 * Constructor for the Question class. Which generates a UUID Creation date and last modified dates with 
-	 * the reqirements of user $question and details 
-	 *
-	 * @param \App\Domain\User $user
-	 * @param string $question
-	 * @param string $details
-	 */
+    /**
+     * Constructor for the Question class. Which generates a UUID Creation date and last modified dates with
+     * the reqirements of user $question and details
+     *
+     * @param \App\Domain\User $user
+     * @param string $question
+     * @param string $details
+     */
     public function __construct(\App\Domain\User $user, $question, $details)
     {
         $this->ID = uniqid("QUE_");

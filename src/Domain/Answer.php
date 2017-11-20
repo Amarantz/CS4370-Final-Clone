@@ -2,7 +2,6 @@
 
 namespace App\Domain;
 
-
 /*
  * This is the Answer class
  * has automaticly generated ID
@@ -13,7 +12,7 @@ namespace App\Domain;
  */
 class Answer
 {
-	/*
+    /*
 	 * @var string $ID
 	 * @var \App\Domain\User $user
 	 * @var int $upvote
@@ -85,7 +84,7 @@ class Answer
     {
         return $this->answer;
     }
-	/*
+    /*
 	 * This incurments the upvote value
 	 */
     public function upvote()
