@@ -9,4 +9,6 @@ interface AdapterInterface
     public function Get($id);
     public function GetAll();
     public function Modify($id, $item);
+    public function GetByString($string);
+    public function Type();
 }

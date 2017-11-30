@@ -33,7 +33,7 @@
 <path fill="none" stroke="gray" d="M445.167,-60C445.167,-60 595.167,-60 595.167,-60 601.167,-60 607.167,-66 607.167,-72 607.167,-72 607.167,-174 607.167,-174 607.167,-180 601.167,-186 595.167,-186 595.167,-186 445.167,-186 445.167,-186 439.167,-186 433.167,-180 433.167,-174 433.167,-174 433.167,-72 433.167,-72 433.167,-66 439.167,-60 445.167,-60"/>
 <text text-anchor="middle" x="520.167" y="-173.2" font-family="Times,serif" font-size="11.00" fill="gray">Models</text>
 </g>
-<!-- \\App\\Storage\\MemoryStorage -->
+<!-- \\App\\Storage\\MemoryPlugin -->
 <g id="node1" class="node"><title>\\App\\Storage\\MemoryStorage</title>
 <polygon fill="none" stroke="black" points="572.167,-614 468.167,-614 468.167,-578 572.167,-578 572.167,-614"/>
 <text text-anchor="middle" x="520.167" y="-593.2" font-family="Courier,monospace" font-size="11.00">MemoryStorage</text>
@@ -43,7 +43,7 @@
 <polygon fill="none" stroke="black" points="247.084,-614 122.084,-614 122.084,-578 247.084,-578 247.084,-614"/>
 <text text-anchor="middle" x="184.584" y="-593.2" font-family="Courier,monospace" font-size="11.00">AdapterInterface</text>
 </g>
-<!-- \\App\\Storage\\MemoryStorage&#45;&gt;\\App\\Storage\\AdapterInterface -->
+<!-- \\App\\Storage\\MemoryPlugin&#45;&gt;\\App\\Storage\\AdapterInterface -->
 <g id="edge1" class="edge"><title>\\App\\Storage\\MemoryStorage&#45;&gt;\\App\\Storage\\AdapterInterface</title>
 <path fill="none" stroke="black" stroke-dasharray="1,5" d="M468.14,-596C411.865,-596 320.896,-596 257.429,-596"/>
 <polygon fill="none" stroke="black" points="257.096,-592.5 247.096,-596 257.096,-599.5 257.096,-592.5"/>

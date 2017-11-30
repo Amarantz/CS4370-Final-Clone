@@ -33,28 +33,34 @@ class UsersSeeder extends AbstractSeed
         $users->insert($data)->save();
 */
         $data[] = [
-            'user_id'    => '000',
-            'name'       => 'Anne Anderson',
+            'uuid'    => 'usr_000',
+            'firstname'  => 'Anne',
+            'lastname' => 'Anderson',
             'email'      => 'anne@example.com',
-            'password'   => '1234pass',
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s"),
+            'password'   => password_hash('1234pass',PASSWORD_BCRYPT),
+            'created' => date("Y-m-d H:i:s"),
+            'updated' => date("Y-m-d H:i:s"),
+            'inactive' => 0,
         ];
         $data[] = [
-            'user_id'    => '001',
-            'name'       => 'Ben Bennett',
+            'uuid'    => 'usr_001',
+            'firstname'       => 'Ben',
+            'lastname' => ' Bennett',
             'email'      => 'ben@example.com',
-            'password'   => '1234pass',
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s"),
+            'password'   => password_hash('1234pass',PASSWORD_BCRYPT),
+            'created' => date("Y-m-d H:i:s"),
+            'updated' => date("Y-m-d H:i:s"),
+            'inactive' => 0,
         ];
         $data[] = [
-            'user_id'    => '002',
-            'name'       => 'Chris Christensen',
+            'uuid'    => 'usr_002',
+            'firstname'       => 'Chris',
+            'lastname'  => 'Christensen',
             'email'      => 'chris@example.com',
-            'password'   => '1234pass',
-            'created_at' => date("Y-m-d H:i:s"),
-            'updated_at' => date("Y-m-d H:i:s"),
+            'password'   => password_hash('1234pass',PASSWORD_BCRYPT),
+            'created' => date("Y-m-d H:i:s"),
+            'updated' => date("Y-m-d H:i:s"),
+            'inactive' => 0,
         ];
 
         $users = $this->table('users');

@@ -27,6 +27,11 @@ class User
     protected $fullName;
 
     /**
+     * @var $password
+     */
+    protected $password;
+
+    /**
      * Class Constructor takes in the email address and full name
      * generantes Uuid related with the user once creating the user.
      * @var id is prefix with USR_ and is legnth of 23 charectors

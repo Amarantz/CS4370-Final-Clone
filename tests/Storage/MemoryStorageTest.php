@@ -1,12 +1,43 @@
 <?php
+namespace Tests\Storage;
+use Doctrine\Instantiator\Exception\UnexpectedValueException;
 use PHPUnit\Framework\TestCase;
+
+class TestClass00
+{
+    protected $ID;
+    protected $data;
+
+    function __construct($ID, $data)
+    {
+        $this->ID = $ID;
+        $this->data = $data;
+    }
+    public function GetID() {
+        return $this->ID;
+    }
+
+    public function getDATA() {
+         return $this->data;
+    }
+
+    public function toArray() {
+        return array(
+            'uuid' => $this->ID,
+            'data' => $this->data,
+        );
+    }
+
+
+}
+
 
 class MemoryStorageTest extends TestCase
 {
     public function testMemoryStorageConstructor()
     {
-        $actual = new \App\Storage\MemoryStorage();
-        $expected = 'App\Storage\MemoryStorage';
+        $actual = new \App\Storage\MemoryPlugin();
+        $expected = 'App\Storage\MemoryPlugin';
 
         $this->assertEquals($expected, get_class($actual));
     }
@@ -14,7 +45,7 @@ class MemoryStorageTest extends TestCase
     public function testMemoryStorageInsert()
     {
         $expected = new \App\Domain\User("Test@Test.com", "Testser Is dead");
-        $userM = new \App\Storage\MemoryStorage();
+        $userM = new \App\Storage\MemoryPlugin();
 
         $userM->Insert($expected);
         $actual = $userM->get($expected->getID());
@@ -22,9 +53,13 @@ class MemoryStorageTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    /**
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage $item is not a object
+     */
     public function testMemoryStorageNumber()
     {
-        $memory = new \App\Storage\MemoryStorage();
+        $memory = new \App\Storage\MemoryPlugin();
 
         $memory->Insert(1);
         $expect = null;
@@ -34,7 +69,7 @@ class MemoryStorageTest extends TestCase
 
     public function testMemoryStorageMoreThanOneItem()
     {
-        $memory = new \App\Storage\MemoryStorage();
+        $memory = new \App\Storage\MemoryPlugin();
         $u = new \App\Domain\User("this@email.com", "tester 1");
         $q = new \App\Domain\Question($u, "Subject", "This is my problem can I get some help Thanks");
 
@@ -56,7 +91,7 @@ class MemoryStorageTest extends TestCase
 
         $id = $u->getID();
 
-        $memory = new \App\Storage\MemoryStorage();
+        $memory = new \App\Storage\MemoryPlugin();
         $memory->Insert($u);
 
         $this->assertEquals(1, $memory->count());
@@ -68,7 +103,7 @@ class MemoryStorageTest extends TestCase
 
     public function testMemoryStorageRemoveAll()
     {
-        $memory = new \App\Storage\MemoryStorage();
+        $memory = new \App\Storage\MemoryPlugin();
         $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
 
         $memory->Insert(new \App\Domain\User("thisis@a.test", "Tester shit"));
@@ -90,9 +125,13 @@ class MemoryStorageTest extends TestCase
 
         $this->assertEquals(0, $memory->count());
     }
+    /**
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionMessage $item is not a object
+     */
     public function testMemoryStroageString()
     {
-        $memory = new \App\Storage\MemoryStorage();
+        $memory = new \App\Storage\MemoryPlugin();
         $string = " This is a random string";
         $memory->Insert($string);
         $expect = null;

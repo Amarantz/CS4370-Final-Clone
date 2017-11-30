@@ -53,9 +53,19 @@ $container['errorHandler'] = function ($c) {
     };
 };
 
+/**
+ * @param $c
+ * @return Closure
+ */
 $container['phpErrorHandler'] = function ($c) {
+    /**
+     * @param $request
+     * @param $response
+     * @param $error
+     * @return mixed
+     */
     return function ($request, $response, $error) use ($c) {
-        $c->get('logger')->error($exception->getMessage());
+        $c->get('logger')->error($error->getMessage());
         $response->getBody()->rewind();
         return $response->withStatus(500)
                         ->withHeader('Content-Type', 'text/html')
@@ -64,10 +74,18 @@ $container['phpErrorHandler'] = function ($c) {
 };
 
 // classes/objects
+/**
+ * @param $c
+ * @return \App\Actions\HomeAction
+ */
 $container[App\Actions\HomeAction::class] = function ($c) {
     return new \App\Actions\HomeAction($c->get('view'), $c->get('logger'));
 };
 
+/**
+ * @param $c
+ * @return \App\Actions\ProfileAction
+ */
 $container[App\Actions\ProfileAction::class] = function ($c) {
     $view = $c->get('view');
     $logger = $c->get('logger');
@@ -75,3 +93,33 @@ $container[App\Actions\ProfileAction::class] = function ($c) {
 
     return new \App\Actions\ProfileAction($view, $logger, $table);
 };
+
+/**
+ * @param $c
+ * @param $table_name
+ * @return \App\Storage\EloquentPlugin
+ */
+$container[App\Storage\EloquentPlugin::class] = function ($c, $table_name){
+    $table = $c->get('db')->table($table_name);
+    return new \App\Storage\EloquentPlugin($table);
+};
+
+/**
+ * @param $c
+ * @return \App\Storage\UserRepository
+ * @throws \Interop\Container\Exception\ContainerException
+ */
+$container[App\Storage\UserRepository::class] = function ($c) {
+    /* @var \Slim\Container $c **/
+    $c->get('Logger')->info("We are setting the user Repository should be working");
+    return new \App\Storage\UserRepository($c->get(App\Storage\EloquentPlugin::class)($c,'user'));
+};
+
+/**
+ * @param $c
+ * @return \App\Middleware\PasswordAuthentication
+ */
+$container[App\Middleware\PasswordAuthentication::class] = function($c) {
+    return new \App\Middleware\PasswordAuthentication($c);
+};
+

@@ -1,9 +1,9 @@
 <?php
 
 namespace Tests\Functional;
-
 class MysqlTest extends BaseTestCase
 {
+
 
     public function testDatabase()
     {
@@ -16,16 +16,15 @@ class MysqlTest extends BaseTestCase
         $this->assertTrue(isset($result));
     }
 
+
+    /**
+    * @expectedException \PDOException
+    **/
     public function testDatabaseBadPass()
     {
-
-        $actual = null;
-        try {
-            $db = new \PDO('mysql:host=localhost;dbname=web4350', 'appuser', 'badpassword');
-        } catch (\Exception $e) {
-            $actual = $e->getMessage();
-        }
-
-        $this->assertTrue(!empty($actual));
+	$actual = null;
+        $db = new \PDO('mysql:host=localhost;dbname=web4350', 'appuser', 'badpassword');
+	
+        $this->assertTrue(empty($actual));
     }
 }
