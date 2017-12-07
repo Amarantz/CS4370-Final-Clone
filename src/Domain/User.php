@@ -110,4 +110,17 @@ class User
         return $this->password;
     }
 
+    public function toArray()
+    {
+        return array(
+            'uuid' => $this->id,
+            'email' => $this->email,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'password' => $this->password,
+            'created' => $this->created,
+            'updated' => $this->updated,
+            );
+    }
+
 }

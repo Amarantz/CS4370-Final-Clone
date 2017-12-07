@@ -26,7 +26,7 @@ class UserTest extends TestCase
     {
         // arrange
         $actual = null;
-        $expected = "arguments are not strings";
+        $expected = '$email is not a string';
         $harness = new \App\Domain\UserBuilder();
         // act
         try {
@@ -67,18 +67,18 @@ class UserTest extends TestCase
         try {
             $harness->setEmail("anne@example.com");
         } catch (\Exception $e) {
-            $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
         }
         //Assert
-        $this->assertEquals($expect, $actual);
+        $actual = $harness->getEmail();
+        $this->assertEquals($expected, $actual);
     }
 
     public function testFirstnameEmptyArgumentsException()
     {
         // arrange
         $actual = null;
-        $expected = "empty arguments";
+        $expected = '$firstname is empty';
         $harness = new \App\Domain\UserBuilder();
         // act
         try {
@@ -96,28 +96,11 @@ class UserTest extends TestCase
     {
         // arrange
         $actual = null;
-        $expected = "arguments are not strings";
+        $expected = '$firstname is not a string';
         $harness = new \App\Domain\UserBuilder();
         // act
         try {
-            $harness->setEmail(1);
-        } catch (\Exception $e) {
-            $actual = $e->getMessage();
-            $this->assertEquals(\InvalidArgumentException::class, get_class($e));
-        }
-        // assert
-        $this->assertEquals($expected, $actual);
-    }
-
-    public function testFirstnameNotValidException()
-    {
-        // arrange
-        $actual = null;
-        $expected = "email is not valid";
-        $harness = new \App\Domain\UserBuilder();
-        // act
-        try {
-            $harness->setEmail("someString");
+            $harness->setFirstname(1);
         } catch (\Exception $e) {
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
@@ -129,12 +112,13 @@ class UserTest extends TestCase
     public function testFirstnameSetting()
     {
         //Arrange
-        $expect = "Anna Able";
+        $expect = "Anna";
         $actual = null;
 
         //act
-        $u = new \App\Domain\User("anna@example.test", 'Anna Able');
-        $actual = $u->getFullname();
+        $harness = new \App\Domain\UserBuilder();
+        $harness->setFirstname('Anna');
+        $actual = $harness->getFirstname();
         //assert
         $this->assertEquals($expect, $actual);
     }
@@ -143,7 +127,7 @@ class UserTest extends TestCase
     {
         // arrange
         $actual = null;
-        $expected = "empty arguments";
+        $expected = '$lastname is empty';
         $harness = new \App\Domain\UserBuilder();
         // act
         try {
@@ -161,7 +145,7 @@ class UserTest extends TestCase
     {
         // arrange
         $actual = null;
-        $expected = "arguments are not strings";
+        $expected = '$lastname is not a string';
         $harness = new \App\Domain\UserBuilder();
         // act
         try {
@@ -181,10 +165,22 @@ class UserTest extends TestCase
         $actual = null;
 
         //act
-        $u = new \App\Domain\UserBuilder();
-        $actual = $u->getFullname();
+        $harness = new \App\Domain\UserBuilder();
+        $harness->setLastname("bell");
+        $actual = $harness->getLastname();
         //assert
         $this->assertEquals($expect, $actual);
+    }
+
+    public function testbuild() {
+        //Arrange
+        $expect = \App\Domain\User::class;
+        $harness = new \App\Domain\UserBuilder();
+
+        $actual = $harness->build();
+
+        $this->assertEquals($expect, get_class($actual));
+
     }
 
 }

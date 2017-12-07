@@ -7,6 +7,7 @@
  */
 
 namespace App\Domain;
+include __DIR__ . '/../constants.php';
 
 
 class UserBuilder extends User
@@ -54,12 +55,12 @@ class UserBuilder extends User
      */
     public function setLastname ( $lastname) {
         if(empty($lastname)) {
-            throw new \InvalidArgumentException('Lastname is empty');
+            throw new \InvalidArgumentException('$lastname is empty');
 
         }
 
         if(!is_string($lastname)){
-            throw new \InvalidArgumentException('Password is not a string');
+            throw new \InvalidArgumentException('$lastname is not a string');
         }
 
         $this->lastname = $lastname;
@@ -70,17 +71,29 @@ class UserBuilder extends User
      * @param String $firstname
      * @return $this
      */
-    public function setFirstname( $firstname){
-        if(empty($lastname)) {
-            throw new \InvalidArgumentException('Lastname is empty');
+    public function setFirstname($firstname){
+        if(empty($firstname)) {
+            throw new \InvalidArgumentException('$firstname is empty');
 
         }
 
-        if(!is_string($lastname)){
-            throw new \InvalidArgumentException('Password is not a string');
+        if(!is_string($firstname)){
+            throw new \InvalidArgumentException('$firstname is not a string');
         }
 
         $this->firstname = $firstname;
+        return $this;
+    }
+
+    public function setID($uuid){
+        if(empty($uuid)){
+            throw new \InvalidArgumentException('ID is empty');
+        }
+        if(!is_string($uuid))
+        {
+            throw new \InvalidArgumentException('ID is not a string');
+        }
+        $this->id = $uuid;
         return $this;
     }
 
@@ -96,7 +109,7 @@ class UserBuilder extends User
         }
 
         if (!is_string($email)) {
-            throw new \InvalidArgumentException("arguments are not strings");
+            throw new \InvalidArgumentException('$email is not a string');
         }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new \InvalidArgumentException("email is not valid");
@@ -105,7 +118,13 @@ class UserBuilder extends User
         return $this;
     }
 
+    /**
+     * @return User
+     */
     public function build(){
+        if(empty($this->id) || $this->id === ''){
+            $this->id = GENERATE_USER_UUID;
+        }
         return new \App\Domain\User($this);
 
     }
