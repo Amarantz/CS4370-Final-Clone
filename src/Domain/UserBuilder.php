@@ -7,7 +7,7 @@
  */
 
 namespace App\Domain;
-include __DIR__ . '/../constants.php';
+require_once __DIR__ . '/../constants.php';
 
 
 class UserBuilder extends User
@@ -87,11 +87,11 @@ class UserBuilder extends User
 
     public function setID($uuid){
         if(empty($uuid)){
-            throw new \InvalidArgumentException('ID is empty');
+            throw new \InvalidArgumentException('$uuid is empty');
         }
         if(!is_string($uuid))
         {
-            throw new \InvalidArgumentException('ID is not a string');
+            throw new \InvalidArgumentException('$uuid is not a string');
         }
         $this->id = $uuid;
         return $this;

@@ -1,5 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
+require_once __DIR__ .'/../src/constants.php';
 
 class UserTest extends TestCase
 {
@@ -172,7 +173,62 @@ class UserTest extends TestCase
         $this->assertEquals($expect, $actual);
     }
 
-    public function testbuild() {
+
+    public function testIDFail00() {
+        //arrange
+        $id = GENERATE_USER_UUID;
+        $expected = '$uuid is empty';
+
+        $actual = null;
+        $harness = new \App\Domain\UserBuilder();
+        try {
+            $harness->setID('');
+        } catch (\Exception $e) {
+            $actual = $e->getMessage();
+            $this->assertEquals(\InvalidArgumentException::class,get_class($e));
+
+        }
+        $this->assertEquals($expected,$actual);
+
+    }
+
+    public function testIDFail01() {
+        //arrange
+        $id = GENERATE_USER_UUID;
+        $expected = '$uuid is not a string';
+
+        $actual = null;
+        $harness = new \App\Domain\UserBuilder();
+        try {
+            $harness->setID(1);
+        } catch (\Exception $e) {
+            $actual = $e->getMessage();
+            $this->assertEquals(\InvalidArgumentException::class,get_class($e));
+
+        }
+        $this->assertEquals($expected,$actual);
+
+    }
+
+    public function testIDSuccess() {
+        //arrange
+        $id = GENERATE_USER_UUID;
+        $expected = $id;
+
+        $actual = null;
+        $harness = new \App\Domain\UserBuilder();
+        try {
+            $harness->setID($id);
+        } catch (\Exception $e) {
+            $this->assertEquals(\InvalidArgumentException::class,get_class($e));
+
+        }
+        $actual = $harness->getID();
+        $this->assertEquals($expected,$actual);
+
+    }
+
+    public function testBuild() {
         //Arrange
         $expect = \App\Domain\User::class;
         $harness = new \App\Domain\UserBuilder();
