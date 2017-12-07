@@ -12,7 +12,7 @@ use Psr\Log\LoggerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Twig;
-use App\Domain\User;
+
 
 class PasswordAuthentication
 {
@@ -32,10 +32,11 @@ class PasswordAuthentication
      */
     public function __construct($container)
     {
+        /** @var \Slim\Container $container */
 
         $this->container = $container;
         $this->log = $this->container->get('logger');
-        $this->repo = $this->container->get(App\Storage\UserRepository::class);
+        $this->repo = $container->get('UserRepositoryEloquent');
     }
 
 
@@ -53,38 +54,44 @@ class PasswordAuthentication
 
 
         //TODO: VALIDATE that $request is a POST
-        if($request->getMethod() !=='POST') {
+        if(!$request->isPost()) {
             $this->log->critical('$request is NOT a POST');
             $response = $next($request, $response);
+            return $response;
         }
         $this->log->info("Attempting to verify user password: Parsing the body");
         $body = $request->getParsedBody();
+        //var_dump($body);
+        //$this->log->info("print of the $body");
         $this->log->critical("settting form Password");
-        $formPassword = $body['f_password'];
-        $this->log->info("Printing the username $formPassword");
+        $formPassword = $body['f_passwore;d'];
+        //$this->log->info("Printing the username $formPassword");
         $this->log->critical("settting form Username/Email");
         $formUser = $body['f_username'];
         $this->log->info("Printing the username $formUser");
         $this->log->critical("loading the user Respository");
-        /** @var \App\Storage\UserRepository $repo*/
-        $this->log-info("print everything from the $repo");
-        var_dump($repo);
         $this->log->critical("Getting the user date from the database if exit.");
-        $user = $repo->Find($formUser);
-        var_dump($user);
+        $user = $this->repo->FindByUsername($formUser);
         if(empty($user))
         {
-            $this->log->critical("We Didn't receive any user data");
-            //TODO; Display message to User invalid user name password
+            $this->log->critical("Inavlide user name");
+            $response = $response->withStatus(401);
+            $response = $response->withRedirect('/invalidusernamepassword');
+            return $response = $next($request,$response);
         }
 
-        if(password_verify($formPassword,$user['password'])){
-            //TODO; Display message to User invalid user name password
+        if(!password_verify($formPassword,$user[0]['password'])){
+            $this->log->critical("Invalid Password");
+            $response = $response->withStatus(401);
+            $response = $response->withRedirect('/invalidusernamepassword');
+            return $response = $next($request,$response);
         }
-
-
+        $this->log->info("user has authenticated");
+        session_start(['cookie_lifetime' => 900]);
+        $_SESSION['userID'] = $user[0]['uuid'];
+        $_SESSION['firstname'] = $user[0]['firstname'];
+        $_SESSION['lastname'] = $user[0]['lastname'];
         //TODO: Create session data and cookie.
-        //
-        $response = $next($request,$response);
+        return $response = $next($request,$response);
     }
 }

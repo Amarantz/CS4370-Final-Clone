@@ -121,7 +121,7 @@ class TestEloquentPlugin extends TestCase
         $this->assertEquals(2,count($actual));
         $expect = 1;
         $harness->Remove('1234abcd');
-        //$harness = new EloquentPlugin($this->db->table('test_table'));
+        $harness = new EloquentPlugin($this->db->table('test_table'));
         $actual = $harness->GetAll();
         //print_r($actual);
         // checking to see that we get one item back as we should only set one record to

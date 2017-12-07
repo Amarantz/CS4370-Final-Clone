@@ -99,7 +99,8 @@ $container[App\Actions\ProfileAction::class] = function ($c) {
  * @param $table_name
  * @return \App\Storage\EloquentPlugin
  */
-$container[App\Storage\EloquentPlugin::class] = function ($c, $table_name){
+$container['EloquentPlugin'] = function ($c, $table_name){
+    $c->get('logger')->info("We are getting the plugin for Eloquent");
     $table = $c->get('db')->table($table_name);
     return new \App\Storage\EloquentPlugin($table);
 };
@@ -109,10 +110,14 @@ $container[App\Storage\EloquentPlugin::class] = function ($c, $table_name){
  * @return \App\Storage\UserRepository
  * @throws \Interop\Container\Exception\ContainerException
  */
-$container[App\Storage\UserRepository::class] = function ($c) {
+$container['UserRepositoryEloquent'] = function ($c) {
     /* @var \Slim\Container $c **/
-    $c->get('Logger')->info("We are setting the user Repository should be working");
-    return new \App\Storage\UserRepository($c->get(App\Storage\EloquentPlugin::class)($c,'user'));
+    //$c->get('logger')->info("We are setting the user Repository should be working");
+    //var_dump($c->get('EloquentPlugin')($c,'users'));
+    $builder = $c->get('db')->table('users');
+    $adapter = new \App\Storage\EloquentPlugin($builder);
+   // $c->get('logger')->info("we are have plugin to work with");
+    return new \App\Storage\UserRepository($adapter);
 };
 
 /**
@@ -123,3 +128,7 @@ $container[App\Middleware\PasswordAuthentication::class] = function($c) {
     return new \App\Middleware\PasswordAuthentication($c);
 };
 
+$container[App\Domain\User::class] = function ()
+{
+    return new \App\Domain\User();
+};

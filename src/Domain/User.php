@@ -31,6 +31,9 @@ class User
      */
     protected $password;
 
+    protected $created;
+    protected $updated;
+
     /**
      * Class Constructor takes in the email address and full name
      * generantes Uuid related with the user once creating the user.
@@ -39,11 +42,9 @@ class User
      * @param $email string of email address
      * @param $name String of full name
      */
-    public function __construct($email, $name)
+    public function __construct()
     {
-        $this->setEmail($email)
-           ->setFullname($name);
-        $this->id = uniqid('USR_', true);
+
     }
 /**
  *@return string email address

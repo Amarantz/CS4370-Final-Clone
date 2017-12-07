@@ -19,7 +19,7 @@ return [
         // Database settings
         'db' => [
             'driver'    => 'mysql',
-            'host'      => '165.227.119.198',
+            'host'      => '165.227.113.198',
             'database'  => 'web4350',
             'username'  => 'appuser',
             'password'  => 'Kmustang@1',

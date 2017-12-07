@@ -10,6 +10,7 @@ namespace App\Storage;
 
 interface RepositoryInterface{
     public function Add($item);
+    public function setAdapter(AdapterInterface $adapter);
     public function Delete($ID);
     public function DeleteAll();
     public function Find($ID);

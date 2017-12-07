@@ -28,10 +28,10 @@ class AnswerMigration extends AbstractMigration
      */
     public function change()
     {
-        //$this->dropTable('upvote');
-        //$this->dropTable('answer');
-        //$this->dropTable('questions');
-        //$this->dropTable('users');
+        $this->dropTable('upvote');
+        $this->dropTable('answer');
+        $this->dropTable('questions');
+        $this->dropTable('users');
 
         $table = $this->table('users');
         $table ->addColumn('uuid','string',['limit'=> 300])
