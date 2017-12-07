@@ -3,14 +3,17 @@ use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
+     //rebuidling tests to use the builder instead of domain class.
     public function testUsersEmptyArgumentsException()
     {
         // arrange
         $actual = null;
         $expected = "empty arguments";
+        $harness = new \App\Domain\UserBuilder();
         // act
         try {
-            new \App\Domain\User("", "");
+            $harness->setEmail('');
+
         } catch (\Exception $e) {
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
@@ -24,9 +27,10 @@ class UserTest extends TestCase
         // arrange
         $actual = null;
         $expected = "arguments are not strings";
+        $harness = new \App\Domain\UserBuilder();
         // act
         try {
-            new \App\Domain\User(1, 1);
+            $harness->setEmail(1);
         } catch (\Exception $e) {
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
@@ -40,9 +44,10 @@ class UserTest extends TestCase
         // arrange
         $actual = null;
         $expected = "email is not valid";
+        $harness = new \App\Domain\UserBuilder();
         // act
         try {
-            new \App\Domain\User("anne@example", "Anne Able");
+            $harness->setEmail("someString");
         } catch (\Exception $e) {
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
@@ -75,4 +80,5 @@ class UserTest extends TestCase
         //assert
         $this->assertEquals($expect, $actual);
     }
+
 }

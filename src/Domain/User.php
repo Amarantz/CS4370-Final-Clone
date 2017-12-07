@@ -22,9 +22,14 @@ class User
     protected $email;
     
     /**
-    * @var $fullname Full name of the users
+    * @var $firstname first name of the users
     */
-    protected $fullName;
+    protected $firstname;
+
+    /**
+     * @var $lastname Last name of the user
+     */
+    protected $lastname;
 
     /**
      * @var $password
@@ -56,9 +61,9 @@ class User
 /**
  * @return string returns the full name
  */
-    public function getFullname()
+    public function getfullname()
     {
-        return $this->fullname;
+        return $this->firstname . ' ' . $this->lastname;
     }
 /**
  *@return string ID returns the id back
@@ -67,41 +72,42 @@ class User
     {
         return $this->id;
     }
-/**
- *@param $e is string of email address
- *
- * @returns self
- */
-    protected function setEmail($e)
-    {
-        if (empty($e)) {
-            throw new \InvalidArgumentException("empty arguments");
-        }
 
-        if (!is_string($e)) {
-            throw new \InvalidArgumentException("arguments are not strings");
-        }
-        if (!filter_var($e, FILTER_VALIDATE_EMAIL)) {
-            throw new \InvalidArgumentException("email is not valid");
-        }
-        $this->email = $e;
-        return $this;
+    public function getFirstname()
+    {
+        return $this->firstname;
     }
 
     /**
-     * @param $n string to set the fulll name
-     *
-     * @returns self
+     * @return mixed
      */
-    protected function setFullname($n)
+    public function getLastname()
     {
-        if (empty($n)) {
-            throw new \InvalidArgumentException("empty arguments");
-        }
-        if (!is_string($n)) {
-            throw new \InvalidArgumentException("arguments are not string");
-        }
-        $this->fullname = $n;
-        return $this;
+        return $this->lastname;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
 }
