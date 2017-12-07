@@ -52,7 +52,7 @@ class UserBuilder extends User
      * @param String $lastname
      * @return $this
      */
-    public function setLastname (\String $lastname) {
+    public function setLastname ( $lastname) {
         if(empty($lastname)) {
             throw new \InvalidArgumentException('Lastname is empty');
 
@@ -70,7 +70,7 @@ class UserBuilder extends User
      * @param String $firstname
      * @return $this
      */
-    public function setFirstname(\String $firstname){
+    public function setFirstname( $firstname){
         if(empty($lastname)) {
             throw new \InvalidArgumentException('Lastname is empty');
 
