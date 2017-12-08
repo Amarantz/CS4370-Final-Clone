@@ -13,6 +13,7 @@ require_once __DIR__ . '/../constants.php';
 class UserBuilder extends User
 {
     /**
+     * Set the password
      * @param String $password
      * @return $this
      */
@@ -28,28 +29,37 @@ class UserBuilder extends User
     }
 
     /**
+     * Set the updated date
      * @param \DateTime $date
      * @return $this
      */
-    public function setUpdated(\DateTime $date) {
+    public function setUpdated($date) {
         if(empty($date)) {
-            throw new \InvalidArgumentException('Updated date is empty');
+            throw new \InvalidArgumentException('$date is empty');
+        }
+        if(!is_string($date)){
+            throw new \InvalidArgumentException('$date is not a string');
         }
         $this->updated = $date;
         return $this;
     }
 
     /**
+     * Set the created date
      * @param \DateTime $date
      */
-    public function setCreated(\DateTime $date){
-        if(empty($date)){
-            throw new \InvalidArgumentException('Created date is empty');
+    public function setCreated($date){
+        if(empty($date)) {
+            throw new \InvalidArgumentException('$date is empty');
+        }
+        if(!is_string($date)){
+            throw new \InvalidArgumentException('$date is not a string');
         }
         $this->created = $date;
     }
 
     /**
+     * set the last name of the profile
      * @param String $lastname
      * @return $this
      */
@@ -68,6 +78,7 @@ class UserBuilder extends User
     }
 
     /**
+     * Set the first name on the user object
      * @param String $firstname
      * @return $this
      */
@@ -85,6 +96,12 @@ class UserBuilder extends User
         return $this;
     }
 
+    /**
+     * Set the UUID for the profile.
+     *
+     * @param $uuid
+     * @return $this
+     */
     public function setID($uuid){
         if(empty($uuid)){
             throw new \InvalidArgumentException('$uuid is empty');
@@ -94,6 +111,16 @@ class UserBuilder extends User
             throw new \InvalidArgumentException('$uuid is not a string');
         }
         $this->id = $uuid;
+        return $this;
+    }
+
+
+    /**
+     * set the new updated date if there is profile update.
+     * @return $this
+     */
+    public function modify(){
+        $this->updated = NOW;
         return $this;
     }
 
