@@ -396,7 +396,13 @@ class UserTest extends TestCase
         $harness = new \App\Domain\UserBuilder();
 
         $actual = $harness->build();
-
+        $this->assertTrue(method_exists($actual,'getEmail'),'Missing Email method');
+        $this->assertTrue(method_exists($actual,'getFullname'),'Missing fullname method');
+        $this->assertTrue(method_exists($actual,'getLastname'),'Missing lastname method');
+        $this->assertTrue(method_exists($actual,'getFirstname'),'Missing firstname method');
+        $this->assertTrue(method_exists($actual,'getPassword'),'Missing Password method');
+        $this->assertTrue(method_exists($actual,'getCreated'),'Missing Created method');
+        $this->assertTrue(method_exists($actual,'getUpdated'),'Missing Updated method');
         $this->assertEquals($expect, get_class($actual));
 
     }
