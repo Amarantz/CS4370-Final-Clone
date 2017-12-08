@@ -340,8 +340,55 @@ class UserTest extends TestCase
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
         }
 
-        $this->assertEquals($expected, $harness->getCreated());
+        $this->assertEquals($expected, $harness->getUpdated());
     }
+
+    public function testPasswordFail00(){
+        $expected = '$password is empty';
+        $actual = null;
+        $harness = new \App\Domain\UserBuilder();
+
+        try{
+            $harness->setPassword(null);
+        } catch (\Exception $e) {
+            $actual = $e->getMessage();
+            $this->assertEquals(\InvalidArgumentException::class, get_class($e));
+        }
+    }
+
+    public function testPasswordFail01(){
+        $expected = '$password is not a string';
+        $actual = null;
+        $harness = new \App\Domain\UserBuilder();
+
+        try{
+            $harness->setPassword(1);
+        } catch (\Exception $e) {
+            $actual = $e->getMessage();
+            $this->assertEquals(\InvalidArgumentException::class, get_class($e));
+        }
+    }
+
+    public function testPasswordSuccess00() {
+        $expected = '1234pass';
+        $harness = new \App\Domain\UserBuilder();
+
+        $harness->setPassword('1234pass');
+
+        $actual = $harness->getPassword();
+        $this->assertEquals($expected,$actual);
+    }
+
+    public function testPasswordSuccess01() {
+        //$expected = password_hash('1234pass',PASSWORD_BCRYPT);
+        $harness = new \App\Domain\UserBuilder();
+
+        $harness->setPassword(password_hash('1234pass',PASSWORD_BCRYPT));
+
+        $actual = $harness->getPassword();
+        $this->assertTrue(password_verify('1234pass',$harness->getPassword()));
+    }
+
 
     public function testBuild() {
         //Arrange
