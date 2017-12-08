@@ -291,6 +291,58 @@ class UserTest extends TestCase
         $this->assertEquals($expected, $harness->getCreated());
     }
 
+
+    public function testUpdatedDateFail00() {
+        $date = NOW;
+        $expected = '$date is empty';
+        $actual = null;
+        $harness = new \App\Domain\UserBuilder();
+
+        try{
+            $harness->setUpdated('');
+
+        } catch (\Exception $e){
+            $actual = $e->getMessage();
+            $this->assertEquals(\InvalidArgumentException::class, get_class($e));
+        }
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testUpdatedDateFail01() {
+        $date = NOW;
+        $expected = '$date is not a string';
+        $actual = null;
+        $harness = new \App\Domain\UserBuilder();
+
+        try{
+            $harness->setUpdated(1);
+
+        } catch (\Exception $e){
+            $actual = $e->getMessage();
+            $this->assertEquals(\InvalidArgumentException::class, get_class($e));
+        }
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testUpdatedDateSuccess() {
+        $date = NOW;
+        $expected = NOW;
+        $actual = null;
+        $harness = new \App\Domain\UserBuilder();
+
+        try{
+            $harness->setUpdated($date);
+
+        } catch (\Exception $e){
+            $actual = $e->getMessage();
+            $this->assertEquals(\InvalidArgumentException::class, get_class($e));
+        }
+
+        $this->assertEquals($expected, $harness->getCreated());
+    }
+
     public function testBuild() {
         //Arrange
         $expect = \App\Domain\User::class;
