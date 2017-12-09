@@ -1,40 +1,40 @@
 <?php
 use PHPUnit\Framework\TestCase;
-
+require_once __DIR__ . '/../src/constants.php';
 class AnswersTest extends TestCase
 {
     public function testAnswerUser()
     {
         //arrange
-        $u = new \App\Domain\User("some@email.com", "anna able");
-        $a = new \App\Domain\Answer($u, "This is an Answer", "QUE_15123123");
+        $u = new \App\Domain\UserBuilder();
+        $u = $u->build();
+        $harness = new \App\Domain\AnswerBuilder();
+        $harness->setUserID($u->getID());
         //act
-        $expect = "some@email.com";
+        $expect = $u->getID();
 
-        $actual = $a->getUser();
+        $actual = $harness->build();
 
-        $this->assertEquals($expect, $actual->getEmail());
+        $this->assertEquals($expect, $actual->getUserID());
     }
 
     public function testAwnserBody()
     {
         $message = "We have an awnser that we can anwser with in a short amount of characters";
-        $u = new \App\Domain\User("some@email.com", "anna able");
-        $a = new \App\Domain\Answer($u, $message, "QUE_15123123");
+        $expected = $message;
+        $harness = new \App\Domain\AnswerBuilder();
+        $harness->setAnswer($message);
         //act
-        $actual = $a->getAnswer();
-
-        $this->assertEquals($message, $actual);
+        $actual = $harness->build();
+        $this->assertEquals($expected, $actual->getAnswer());
     }
 
     public function testAwnserFail01()
     {
         $actual = null;
-        $expect = "Argument is not a string";
+        $expect = '$answer is not a string';
 
         try {
-                $u = new \App\Domain\User("some@email.com", "anna able");
-            $a = new \App\Domain\Answer($u, 1, "QUE_15123123");
         } catch (\Exception $e) {
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
@@ -90,7 +90,7 @@ class AnswersTest extends TestCase
 
     public function testCreationDate()
     {
-        $expect = date("Y-m-d H:i:s");
+        $expect = NOW;
 
         $u = new \App\Domain\User("some@email.com", "anna able");
         $a = new \App\Domain\Answer($u, "This is an Answer", "QUE_15123123");

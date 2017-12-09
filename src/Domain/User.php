@@ -123,4 +123,8 @@ class User
             );
     }
 
+    protected function getParent(){
+        return $this;
+    }
+
 }

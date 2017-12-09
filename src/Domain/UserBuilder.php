@@ -12,6 +12,13 @@ require_once __DIR__ . '/../constants.php';
 
 class UserBuilder extends User
 {
+    protected $user;
+
+    public function __construct()
+    {
+        $this->user = new \App\Domain\User();
+    }
+
     /**
      * Set the password
      * @param String $password
@@ -24,7 +31,7 @@ class UserBuilder extends User
         if(!is_string($password)){
             throw new \InvalidArgumentException('Password is not a string');
         }
-        $this->password = $password;
+        $this->user->password = $password;
         return $this;
     }
 
@@ -40,7 +47,7 @@ class UserBuilder extends User
         if(!is_string($date)){
             throw new \InvalidArgumentException('$date is not a string');
         }
-        $this->updated = $date;
+        $this->user->updated = $date;
         return $this;
     }
 
@@ -55,7 +62,8 @@ class UserBuilder extends User
         if(!is_string($date)){
             throw new \InvalidArgumentException('$date is not a string');
         }
-        $this->created = $date;
+        $this->user->created = $date;
+        return $this;
     }
 
     /**
@@ -73,7 +81,7 @@ class UserBuilder extends User
             throw new \InvalidArgumentException('$lastname is not a string');
         }
 
-        $this->lastname = $lastname;
+        $this->user->lastname = $lastname;
         return $this;
     }
 
@@ -92,7 +100,7 @@ class UserBuilder extends User
             throw new \InvalidArgumentException('$firstname is not a string');
         }
 
-        $this->firstname = $firstname;
+        $this->user->firstname = $firstname;
         return $this;
     }
 
@@ -110,7 +118,7 @@ class UserBuilder extends User
         {
             throw new \InvalidArgumentException('$uuid is not a string');
         }
-        $this->id = $uuid;
+        $this->user->id = $uuid;
         return $this;
     }
 
@@ -120,7 +128,7 @@ class UserBuilder extends User
      * @return $this
      */
     public function modify(){
-        $this->updated = NOW;
+        $this->user->updated = NOW;
         return $this;
     }
 
@@ -141,7 +149,7 @@ class UserBuilder extends User
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new \InvalidArgumentException("email is not valid");
         }
-        $this->email = $email;
+        $this->user->email = $email;
         return $this;
     }
 
@@ -150,9 +158,9 @@ class UserBuilder extends User
      */
     public function build(){
         if(empty($this->id) || $this->id === ''){
-            $this->id = GENERATE_USER_UUID;
+            $this->user->id = GENERATE_USER_UUID;
         }
-        return new \App\Domain\User($this);
+        return $this->user;
 
     }
 }

@@ -71,8 +71,8 @@ class UserTest extends TestCase
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
         }
         //Assert
-        $actual = $harness->getEmail();
-        $this->assertEquals($expected, $actual);
+        $actual = $harness->build();
+        $this->assertEquals($expected, $actual->getEmail());
     }
 
     public function testFirstnameEmptyArgumentsException()
@@ -119,9 +119,10 @@ class UserTest extends TestCase
         //act
         $harness = new \App\Domain\UserBuilder();
         $harness->setFirstname('Anna');
-        $actual = $harness->getFirstname();
+        $actual = $harness->build();
         //assert
-        $this->assertEquals($expect, $actual);
+
+        $this->assertEquals($expect, $actual->getFirstname());
     }
 
     public function testLastnameEmptyArgumentsException()
@@ -168,9 +169,9 @@ class UserTest extends TestCase
         //act
         $harness = new \App\Domain\UserBuilder();
         $harness->setLastname("bell");
-        $actual = $harness->getLastname();
         //assert
-        $this->assertEquals($expect, $actual);
+        $actual = $harness->build();
+        $this->assertEquals($expect, $actual->getLastname());
     }
 
 
@@ -223,8 +224,8 @@ class UserTest extends TestCase
             $this->assertEquals(\InvalidArgumentException::class,get_class($e));
 
         }
-        $actual = $harness->getID();
-        $this->assertEquals($expected,$actual);
+        $actual = $harness->build();
+        $this->assertEquals($expected,$actual->getID());
 
     }
 
@@ -235,8 +236,8 @@ class UserTest extends TestCase
 
         //act
         $harness->setFirstname('Anna')->setLastname('Test');
-
-        $this->assertEquals($expect, $harness->getfullname());
+        $actual = $harness->build();
+        $this->assertEquals($expect, $actual->getfullname());
 
     }
 
@@ -287,8 +288,8 @@ class UserTest extends TestCase
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
         }
-
-        $this->assertEquals($expected, $harness->getCreated());
+        $actual = $harness->build();
+        $this->assertEquals($expected, $actual->getCreated());
     }
 
 
@@ -339,8 +340,9 @@ class UserTest extends TestCase
             $actual = $e->getMessage();
             $this->assertEquals(\InvalidArgumentException::class, get_class($e));
         }
+        $actual = $harness->build();
 
-        $this->assertEquals($expected, $harness->getUpdated());
+        $this->assertEquals($expected, $actual->getUpdated());
     }
 
     public function testPasswordFail00(){
@@ -375,8 +377,8 @@ class UserTest extends TestCase
 
         $harness->setPassword('1234pass');
 
-        $actual = $harness->getPassword();
-        $this->assertEquals($expected,$actual);
+        $actual = $harness->build();
+        $this->assertEquals($expected,$actual->getPassword());
     }
 
     public function testPasswordSuccess01() {
@@ -385,8 +387,8 @@ class UserTest extends TestCase
 
         $harness->setPassword(password_hash('1234pass',PASSWORD_BCRYPT));
 
-        $actual = $harness->getPassword();
-        $this->assertTrue(password_verify('1234pass',$harness->getPassword()));
+        $actual = $harness->build();
+        $this->assertTrue(password_verify('1234pass',$actual->getPassword()));
     }
 
 
@@ -394,6 +396,11 @@ class UserTest extends TestCase
         //Arrange
         $expect = \App\Domain\User::class;
         $harness = new \App\Domain\UserBuilder();
+        $harness->setPassword('1234pass')
+            ->setUpdated(NOW)
+            ->setCreated(NOW);
+        $expectedDate = NOW;
+        $expectedPass = '1234pass';
 
         $actual = $harness->build();
         $this->assertTrue(method_exists($actual,'getEmail'),'Missing Email method');
@@ -404,6 +411,9 @@ class UserTest extends TestCase
         $this->assertTrue(method_exists($actual,'getCreated'),'Missing Created method');
         $this->assertTrue(method_exists($actual,'getUpdated'),'Missing Updated method');
         $this->assertEquals($expect, get_class($actual));
+        $this->assertEquals($expectedDate,$actual->getCreated());
+        $this->assertEquals($expectedDate,$actual->getUpdated());
+        $this->assertEquals($expectedPass,$actual->getPassword());
 
     }
 

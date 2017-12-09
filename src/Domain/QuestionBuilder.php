@@ -8,7 +8,7 @@
 
 namespace App\Domain;
 
-
+require_once __DIR__ . '/../constants.php';
 class QuestionBuilder extends Question
 {
 //    protected $ID;
@@ -18,9 +18,24 @@ class QuestionBuilder extends Question
 //    protected $updatedDate;
 //    protected $creationDate;
 
+    protected $questions;
+
+    public function __construct()
+    {
+        $this->questions = new \App\Domain\Question();
+    }
+
     public function setID($uuid)
     {
-        //TODO:
+        if(empty($uuid))
+        {
+            throw new \InvalidArgumentException('$uuid is empty');
+        }
+        if(!is_string($uuid))
+        {
+            throw new \InvalidArgumentException('$uuid is not a string');
+        }
+        $this->questions->ID = $uuid;
         return $this;
     }
 
@@ -42,7 +57,7 @@ class QuestionBuilder extends Question
         if (strlen($question) > 256) {
             throw new \InvalidArgumentException("Question length is to long");
         }
-        $this->question = $question;
+        $this->questions->question = $question;
         return $this;
     }
 
@@ -63,16 +78,20 @@ class QuestionBuilder extends Question
                 throw new \InvalidArgumentException("Question body is to long");
             }
 
-            $this->details = $details;
+            $this->questions->details = $details;
             return $this;
     }
 
-    public function setUser(\App\Domain\User $user){
-        if(empty($user))
+    public function setUser($userID){
+        if(empty($userID))
         {
             throw new \InvalidArgumentException('$user is empty');
         }
-        $this->userID = $user;
+        if(!is_string($userID))
+        {
+            throw new \InvalidArgumentException('$user is not a string');
+        }
+        $this->questions->userID = $userID;
         return $this;
     }
 
@@ -84,7 +103,7 @@ class QuestionBuilder extends Question
         if(!is_string($date)){
             throw new \InvalidArgumentException('$date is not string');
         }
-        $this->updatedDate = $date;
+        $this->questions->updatedDate = $date;
         return $this;
     }
 
@@ -96,14 +115,14 @@ class QuestionBuilder extends Question
         if(!is_string($date)){
             throw new \InvalidArgumentException('$date is not string');
         }
-        $this->updatedDate = $date;
+        $this->questions->updatedDate = $date;
         return $this;
     }
 
     public function build(){
-        if(empty($this->ID)){
-            $this->ID = GENERATE_QUESTION_UUID;
+        if(empty($this->questions->ID)){
+            $this->questions->ID = GENERATE_QUESTION_UUID;
         }
-        return new \App\Domain\Question($this);
+        return $this->questions;
     }
 }

@@ -12,9 +12,10 @@ class QuestionTest extends TestCase
         $harness = new \App\Domain\QuestionBuilder();
         //assert
         $harness->setQuestion('This is a Question');
+        $actual = $harness->build();
 
-        $this->assertTrue(empty($harness->getID()));
-        $this->assertEquals($expect, $harness->getQuestion());
+        $this->assertTrue(!empty($actual->getID()));
+        $this->assertEquals($expect, $actual->getQuestion());
     }
 
     public function testQuestionSubjectFail00()
@@ -43,8 +44,9 @@ class QuestionTest extends TestCase
 
         //act
         $harness->setDetails('this is the body');
+        $actual = $harness->build();
         //assert
-        $this->assertEquals($expect, $harness->getDetails());
+        $this->assertEquals($expect, $actual->getDetails());
     }
 
     public function testQuestionDetailsFails()
@@ -134,12 +136,14 @@ class QuestionTest extends TestCase
         $u->setEmail('some@email.com');
         $u = $u->build();
         $harness = new \App\Domain\QuestionBuilder();
-        $harness->setUser($u);
-        $expected = 'some@email.com';
+        $harness->setUser($u->getID());
+        $expected = $u->getID();
     //act
-        $actual = $harness->getUser();
+        $actual1 = $harness->build();
+        $actual = $actual1->getUserID();
+
     //assert
-        $this->assertEquals($expected, $actual->getEmail());
+        $this->assertEquals($expected, $actual);
     }
     public function testQuestionNumber()
     {

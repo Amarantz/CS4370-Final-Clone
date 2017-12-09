@@ -21,60 +21,19 @@ class Answer
 	 * @var datetiem @modiifiedDate
 	 */
     protected $ID;
-    protected $user;
+    protected $userID;
     protected $answer;
     protected $upvote;
     protected $questionID;
-    protected $createdDate;
-    protected $modifiedDate;
-
-    /*
-     * Constructor for the class 
-     * @param \App\Domain\User $user
-     * @param string $answer
-     * @param string $questionID
-     */
-    public function __construct(\App\Domain\User $user, $answer, $questionID)
-    {
-        $this->ID = uniqid("anw_");
-        $this->questionID = $questionID;
-        $this->createdDate = date('Y-m-d H:i:s');
-        $this->modifiedDate = date('Y-m-d H:i:s');
-        $this->upvote = 0;
-        $this->user = $user;
-        $this->setAnswer($answer);
-    }
+    protected $created;
+    protected $updated;
 
     /*
      * @return $user;
      */
-    public function getUser()
+    public function getUserID()
     {
-        return $this->user;
-    }
-
-    /*
-     * @param string $string
-     *
-     * @return self
-     */
-    protected function setAnswer($string)
-    {
-
-        if (empty($string)) {
-            throw new \InvalidArgumentException("Argument is empty");
-        }
-
-        if (!is_string($string)) {
-            throw new \InvalidArgumentException("Argument is not a string");
-        }
-
-        if (strlen($string) > 2000) {
-            throw new \InvalidArgumentException("The Argument is to long");
-        }
-
-        $this->answer = $string;
-        return $this;
+        return $this->userID;
     }
 
     /*
@@ -93,15 +52,6 @@ class Answer
     }
 
     /*
-     * @param int $int
-     */
-    protected function setUpvote($int)
-    {
-        $this->upvote = $int;
-        return $this;
-    }
-
-    /*
      * @return $upvote 
      */
     public function getUpvote()
@@ -112,16 +62,28 @@ class Answer
     /*
      * @return $createdDate;
      */
-    public function getCreationDate()
+    public function getCreated()
     {
-        return $this->createdDate;
+        return $this->created;
     }
 
     /*
      * @return $modifiedDate
      */
-    public function getModifiedDate()
+    public function getUpdated()
     {
-        return $this->modifiedDate;
+        return $this->updated;
+    }
+
+    public function toArray(){
+        return array(
+            'uuid' => $this->ID,
+            'answer' => $this->answer,
+            'created' => $this->created,
+            'userID' => $this->userID,
+            'updated' => $this->updated,
+            'questionID'=> $this->questionID,
+            'upvote' => $this->upvote,
+        );
     }
 }

@@ -27,9 +27,9 @@ class Question
 	 */
     protected $details;
     /*
-		* @var User - @link \App\Domain\User  This is the user associated with the message
+		* @var $userID has the Assocated USER ID
 	 */
-    protected $user;
+    protected $userID;
     /*
 		* @var $updateDate - This is the modified date of the quetion if it has been editied. 
 	 */
@@ -37,25 +37,29 @@ class Question
     /*
 		* @var createionDate - This is the date the question was created;
 	 */
-    protected $creation;
+    protected $created;
 
-    /*
-     * @return \App\Domain\User
+
+    /**
+     * Returns the the userID
+     * @return $userID
      */
-    public function getUser()
+    public function getUserID()
     {
-        return $this->user;
+        return $this->userID;
     }
 
     /*
-     * @return $questioin
+     * Returns the question
+     * @return $question
      */
     public function getQuestion()
     {
         return $this->question;
     }
 
-    /*
+    /**
+     * Returns the UUID for the question
      * @returns $ID
      */
     public function getID()
@@ -63,11 +67,43 @@ class Question
         return $this->ID;
     }
 
-    /*
+    /**
+     * Get the details of the question
      * @return $details
      */
     public function getDetails()
     {
         return $this->details;
+    }
+
+    /**
+     * Generates an Array to use with the database.
+     * @return array
+     */
+    public function toArray() {
+        return array(
+            'uuid' => $this->ID,
+            'userID' => $this->userID,
+            'question' => $this->question,
+            'created' => $this->created,
+            'updated' => $this->updated,
+            'details' => $this->details,
+        );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }
