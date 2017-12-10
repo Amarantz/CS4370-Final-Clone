@@ -25,7 +25,12 @@ class UserRepositoryTest extends TestCase
     public function testNewUserRepository() {
         //Arrange
         $c = $this->app->getContainer();
-        $repo = $c->get('UserRepository')($c,'Users');
+        /** @var \App\Storage\UserRepository $repo */
+        $repo = $c->get('UserRepositoryEloquent');
+
+        $users = $repo->FindAll();
+
+        $this->assertTrue(!empty($users));
 
     }
 }

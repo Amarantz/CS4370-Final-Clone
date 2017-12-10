@@ -51,7 +51,16 @@ class PasswordAuthentication
 
 
         //$response->getBody()->write('BEFORE');
-
+        if(session_status() === PHP_SESSION_ACTIVE && isset($_SESSION['user'])){
+            $result = $this->repo->Find($_SESSION['user']);
+            if(count($result) > 0){
+                return $response = $next($request,$response);
+            } else {
+                session_destroy();
+                $response = $response->withStatus(405);
+                return $response = $next($request,$response);
+            }
+        }
 
         //TODO: VALIDATE that $request is a POST
         if(!$request->isPost()) {
@@ -77,13 +86,16 @@ class PasswordAuthentication
             if (password_verify($formPassword, $users[0]->getPassword())) {
                 $this->log->debug("we are logged in");
                 session_destroy();
-                session_start(['COOKIE_TIMEOUT' => SESSION_TIMEOUT]);
+                session_start(['cookie_lifetime' => SESSION_TIMEOUT]);
+                $this->log->debug("setting the session user");
                 $_SESSION['user'] = $users[0]->getID();
-                $response = $response->withStatus(201);
-                var_dump($_SESSION());
+                $this->log->debug($_SESSION['user']. " we should have userID");
+                $response = $response->withStatus(202);
+                return $response = $next($request,$response);
             }
-        }
 
+            $response = $response->withStatus(401);
+        }
 
         return $response = $next($request,$response);
     }

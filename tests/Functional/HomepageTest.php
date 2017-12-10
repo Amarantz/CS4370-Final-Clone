@@ -13,7 +13,16 @@ class HomepageTest extends BaseTestCase
 
         $this->assertEquals(200, $response->getStatusCode());
         //$this->assertContains('Welcome to Web4350 Exchange', (string)$response->getBody());
-        $this->assertContains('Sign In', (string)$response->getBody());
+        $this->assertContains('Login', (string)$response->getBody());
+    }
+
+    public function testGetHomepageRegister()
+    {
+        $response = $this->runApp('GET', '/');
+
+        $this->assertEquals(200, $response->getStatusCode());
+        //$this->assertContains('Welcome to Web4350 Exchange', (string)$response->getBody());
+        $this->assertContains('Register', (string)$response->getBody());
     }
 
     /**
@@ -24,6 +33,9 @@ class HomepageTest extends BaseTestCase
         $response = $this->runApp('POST', '/', ['test']);
 
         $this->assertEquals(405, $response->getStatusCode());
-        $this->assertContains('Method not allowed', (string)$response->getBody());
+        // Because we can post in to the middleware for authentication we can post it directly to the home page and it handles the login.
+        //$this->assertContains('Method not allowed', (string)$response->getBody());
     }
+
+
 }

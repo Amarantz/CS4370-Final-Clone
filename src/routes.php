@@ -6,13 +6,28 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 // Get Routes
-$app->get('/', App\Actions\HomeAction::class)->setName('homepage');
-$app->get('/registration', App\Actions\RegisterAction::class)->setName('RegistrationPage');
-$app->get('/questions', App\Actions\QuestionActions::class)->setName('QuestionsPage');
-$app->get('/questions/{id}', App\Actions\QuestionActions::class)->setName('QuestionsPage');
-$app->get('/question/ask', App\Actions\QuestionActions::class)->setName('QuestionsPage');
+$app->get('/', App\Controller\HomeController::class.':index')->setName('home');
 
-// Post Routes
-$app->post('/profile', App\Actions\ProfileAction::class)->setName('ProfilePage');
-$app->post('/registration', App\Actions\ReisterAction::class)->setName('PostRegistrationPage');
-$app->post('/question', App\Actions\QuestionsActions::class)->setName('QuestionsPage');
+$app->group('/auth', function(){
+    $this->get('/register', App\Controller\Auth\AuthController::class.':getRegistration')->setName('auth.register');
+    $this->post('/register', App\Controller\Auth\AuthController::class.':postRegistration');
+});
+
+//$app->group('/users', function () {
+//    $this->get('/{id}', 'UserController:profile')->setName('ProfilePage');
+//    $this->post('', 'UserController:create');
+//    $this->patch('/{id}', 'UserController:update');
+//});
+//
+//$app->group('/questions', function(){
+//    $this->get('', App\Controller\QuestionController::class.':index')->set('QuestionsPage');
+//    $this->post('', App\Controller\QuestionController::class.':create');
+//    $this->patch('/{id}', App\Controller\QuestionController::class.':modify');
+//});
+//
+//$app->group('/answers', function(){
+//    $this->get('', App\Controller\AnswersController::class.':index')->set('QuestionsPage');
+//    $this->post('', App\Controller\AnswersController::class.':create');
+//    $this->patch('/{id}', App\Controller\AnswersController::class.':modify');
+//});
+//

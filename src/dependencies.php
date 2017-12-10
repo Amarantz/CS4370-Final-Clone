@@ -76,23 +76,12 @@ $container['phpErrorHandler'] = function ($c) {
 // classes/objects
 /**
  * @param $c
- * @return \App\Actions\HomeAction
+ * @return \App\Controller\HomeController
  */
-$container[App\Actions\HomeAction::class] = function ($c) {
-    return new \App\Actions\HomeAction($c->get('view'), $c->get('logger'));
+$container[App\Controller\HomeController::class] = function ($c) {
+    return new \App\Controller\HomeController($c);
 };
 
-/**
- * @param $c
- * @return \App\Actions\ProfileAction
- */
-$container[App\Actions\ProfileAction::class] = function ($c) {
-    $view = $c->get('view');
-    $logger = $c->get('logger');
-    $table = $c->get('db')->table('users');
-
-    return new \App\Actions\ProfileAction($view, $logger, $table);
-};
 
 /**
  * @param $c
@@ -131,4 +120,16 @@ $container[App\Middleware\PasswordAuthentication::class] = function($c) {
 $container[App\Domain\User::class] = function ()
 {
     return new \App\Domain\User();
+};
+
+$container['UserBuilder'] = function () {
+    return new \App\Domain\UserBuilder();
+};
+
+$container[App\Controller\Auth\AuthController::class] = function($c) {
+    return new \App\Controller\Auth\AuthController($c);
+};
+
+$container['validator'] = function($c) {
+    return new \App\Validation\Validator;
 };

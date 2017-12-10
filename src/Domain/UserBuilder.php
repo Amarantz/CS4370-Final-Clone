@@ -95,11 +95,9 @@ class UserBuilder extends User
             throw new \InvalidArgumentException('$firstname is empty');
 
         }
-
         if(!is_string($firstname)){
             throw new \InvalidArgumentException('$firstname is not a string');
         }
-
         $this->user->firstname = $firstname;
         return $this;
     }
@@ -159,6 +157,12 @@ class UserBuilder extends User
     public function build(){
         if(empty($this->id) || $this->id === ''){
             $this->user->id = GENERATE_USER_UUID;
+        }
+        if(empty($this->created) || $this->created ===''){
+            $this->user->created = NOW;
+        }
+        if(empty($this->updated) || $this->updated ===''){
+            $this->user->updated = NOW;
         }
         return $this->user;
 
