@@ -12,11 +12,8 @@ class HomepageTest extends BaseTestCase
         $response = $this->runApp('GET', '/');
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains('Welcome to Web4350 Exchange', (string)$response->getBody());
+        //$this->assertContains('Welcome to Web4350 Exchange', (string)$response->getBody());
         $this->assertContains('Sign In', (string)$response->getBody());
-        $this->assertContains('Username', (string)$response->getBody());
-        $this->assertContains('Password', (string)$response->getBody());
-        $this->assertNotContains('Hello', (string)$response->getBody());
     }
 
     /**

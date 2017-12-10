@@ -8,128 +8,58 @@ namespace App\Domain;
 
 /**
  * Question Concrete class. This is how a question is created when generate in the system. Question Summry or statement has limitation 256 car
- * cahrectors.  and the details of teh question are limited to 1000 carectors. 
+ * cahrectors.  and the details of teh question are limited to 1000 carectors.
  *
  */
 
 class Question
 {
-	/*
+    /*
 	 * @var $ID - This is the uninque ID that is generated when the class is created. 
 	 */
-	protected $ID;
-	/*
+    protected $ID;
+    /*
 	 * @var $question - this is the statment or question being asked.
 	 */
-	protected $question;
-	/*
+    protected $question;
+    /*
 	 * @var $details  - This is the complete details or description of the question;
 	 */
-	protected $details;
-	/*
-		* @var User - @link \App\Domain\User  This is the user associated with the message
+    protected $details;
+    /*
+		* @var $userID has the Assocated USER ID
 	 */
-	protected $user;
-	/*
+    protected $userID;
+    /*
 		* @var $updateDate - This is the modified date of the quetion if it has been editied. 
 	 */
-	protected $updatedDate;
-	/*
+    protected $updated;
+    /*
 		* @var createionDate - This is the date the question was created;
 	 */
-    protected $creationDate;
+    protected $created;
 
-	/**
-	 * Constructor for the Question class. Which generates a UUID Creation date and last modified dates with 
-	 * the reqirements of user $question and details 
-	 *
-	 * @param \App\Domain\User $user
-	 * @param string $question
-	 * @param string $details
-	 */
-    public function __construct(\App\Domain\User $user, $question, $details)
-    {
-        $this->ID = uniqid("QUE_");
-        $this->setQuestion($question);
-        $this->setDetails($details);
-        $this->setUser($user);
-        $this->creationDate = date('Y-m-d H:i:s');
-        $this->modifiedDate = date('Y-m-d H:i:s');
-    }
 
-    /*
-     * This allow for the change of the question
-     * @param string $s with a limitation of 256 characters
-     * @return self
+    /**
+     * Returns the the userID
+     * @return $userID
      */
-    protected function setQuestion($s)
+    public function getUserID()
     {
-        if (empty($s)) {
-            throw new \InvalidArgumentException("Not a valid Argument");
-        }
-        
-        if (!is_string($s)) {
-            throw new \InvalidArgumentException("Argument is not a string");
-        }
-
-        if (strlen($s) > 256) {
-            throw new \InvalidArgumentException("Question length is to long");
-        }
-
-        $this->question = $s;
-        return $this;
+        return $this->userID;
     }
 
     /*
-     * Sets the details of the object
-     * @param string $s
-     *
-     * @return self
-     */
-    protected function setDetails($s)
-    {
-        if (empty($s)) {
-            throw new \InvalidArgumentException("Not a valid Argument");
-        }
-        if (!is_string($s)) {
-            throw new \InvalidArgumentException("Argument is not a string");
-        }
-
-        if (strlen($s) > 1000) {
-            throw new \InvalidArgumentException("Question body is to long");
-        }
-
-        $this->details = $s;
-        return $this;
-    }
-
-    /*
-     * @param \App\Domain\User $u
-     * @return this
-     */
-    protected function setUser(\App\Domain\user $u)
-    {
-        $this->user = $u;
-        return $this;
-    }
-
-    /*
-     * @return \App\Domain\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /*
-     * @return $questioin
+     * Returns the question
+     * @return $question
      */
     public function getQuestion()
     {
         return $this->question;
     }
 
-    /*
+    /**
+     * Returns the UUID for the question
      * @returns $ID
      */
     public function getID()
@@ -137,12 +67,44 @@ class Question
         return $this->ID;
     }
 
-    /*
+    /**
+     * Get the details of the question
      * @return $details
      */
     public function getDetails()
     {
         return $this->details;
+    }
+
+    /**
+     * Generates an Array to use with the database.
+     * @return array
+     */
+    public function toArray() {
+        return array(
+            'uuid' => $this->ID,
+            'userID' => $this->userID,
+            'question' => $this->question,
+            'created' => $this->created,
+            'updated' => $this->updated,
+            'details' => $this->details,
+        );
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }
 

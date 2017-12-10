@@ -144,9 +144,8 @@ class EloquentPlugin implements AdapterInterface
             throw new UnexpectedValueException('$String is empty');
         }
 
-
-
         return $this->query->where($this->columnName,$searchValue)->get();
+
     }
 
     /**

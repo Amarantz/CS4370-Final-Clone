@@ -57,7 +57,14 @@ class UserRepository implements RepositoryInterface
      */
     public function Find($id)
     {
-        $this->adapter->Get($id);
+        if($this->adapter->type() === \App\Storage\EloquentPlugin::class) {
+            $this->adapter->SetGetByStringColumn('email');
+            $results = $this->adapter->Get($id);
+            $users = $this->build($results);
+            return $users;
+        }
+
+        return $this->adapter->Get($id);
     }
 
     /**
@@ -65,7 +72,13 @@ class UserRepository implements RepositoryInterface
      */
     public function FindAll()
     {
-        $this->adapter->GetAll();
+        if($this->adapter->type() === \App\Storage\EloquentPlugin::class) {
+            $this->adapter->SetGetByStringColumn('email');
+            $results = $this->adapter->GetAll();
+            $users = $this->build($results);
+            return $users;
+        }
+        return $this->adapter->GetAll();
     }
 
 
@@ -81,10 +94,34 @@ class UserRepository implements RepositoryInterface
 
     public function FindByUsername($string)
     {
+
         if($this->adapter->type() === \App\Storage\EloquentPlugin::class) {
             $this->adapter->SetGetByStringColumn('email');
+            $results = $this->adapter->GetByString($string);
+            $users =$this->build($results);
+            return $users;
         }
         return $this->adapter->GetByString($string);
+    }
+
+    /**
+     * @param $results
+     * @return array
+     */
+    protected function build($results){
+        $users = [];
+        foreach($results as $user){
+            $ubuilder = new \App\Domain\UserBuilder();
+            $users[] = $ubuilder->setFirstname($user->firstname)
+            ->setLastname($user->lastname)
+            ->setID($user->uuid)
+            ->setUpdated($user->updated)
+            ->setCreated($user->created)
+            ->setPassword($user->password)
+            ->setEmail($user->email)
+            ->build();
+        }
+        return $users;
     }
 
     public function FindByString($string)

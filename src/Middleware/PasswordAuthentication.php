@@ -13,7 +13,7 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Twig;
 
-
+require_once __DIR__ . '/../constants.php';
 class PasswordAuthentication
 {
     /** @var \Slim\Container $container */
@@ -61,37 +61,30 @@ class PasswordAuthentication
         }
         $this->log->info("Attempting to verify user password: Parsing the body");
         $body = $request->getParsedBody();
-        //var_dump($body);
-        //$this->log->info("print of the $body");
-        $this->log->critical("settting form Password");
-        $formPassword = $body['f_passwore;d'];
-        //$this->log->info("Printing the username $formPassword");
-        $this->log->critical("settting form Username/Email");
-        $formUser = $body['f_username'];
-        $this->log->info("Printing the username $formUser");
-        $this->log->critical("loading the user Respository");
-        $this->log->critical("Getting the user date from the database if exit.");
-        $user = $this->repo->FindByUsername($formUser);
-        if(empty($user))
-        {
-            $this->log->critical("Inavlide user name");
-            $response = $response->withStatus(401);
-            $response = $response->withRedirect('/invalidusernamepassword');
-            return $response = $next($request,$response);
+        if(!empty($body['f_password']) && !empty($body['f_username'])) {
+            $this->log->critical("settting form Password");
+            $formPassword = $body['f_password'];
+            //$this->log->info("Printing the username $formPassword");
+            $this->log->critical("settting form Username/Email");
+            $formUser = $body['f_username'];
+            $this->log->info("Printing the username $formUser");
+            $this->log->critical("loading the user Respository");
+            $this->log->critical("Getting the user date from the database if exit.");
+
+            /** @var \App\Domain\User $users */
+            $users = $this->repo->FindByUsername($formUser);
+            //var_dump($users);
+            if (password_verify($formPassword, $users[0]->getPassword())) {
+                $this->log->debug("we are logged in");
+                session_destroy();
+                session_start(['COOKIE_TIMEOUT' => SESSION_TIMEOUT]);
+                $_SESSION['user'] = $users[0]->getID();
+                $response = $response->withStatus(201);
+                var_dump($_SESSION());
+            }
         }
 
-        if(!password_verify($formPassword,$user[0]['password'])){
-            $this->log->critical("Invalid Password");
-            $response = $response->withStatus(401);
-            $response = $response->withRedirect('/invalidusernamepassword');
-            return $response = $next($request,$response);
-        }
-        $this->log->info("user has authenticated");
-        session_start(['cookie_lifetime' => 900]);
-        $_SESSION['userID'] = $user[0]['uuid'];
-        $_SESSION['firstname'] = $user[0]['firstname'];
-        $_SESSION['lastname'] = $user[0]['lastname'];
-        //TODO: Create session data and cookie.
+
         return $response = $next($request,$response);
     }
 }

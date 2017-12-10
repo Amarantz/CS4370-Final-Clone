@@ -93,13 +93,10 @@ class AnswerBuilder extends Answer
     }
 
     public function setUpvote($upvote) {
-        if(empty($upvote)){
-            throw new \InvalidArgumentException('$upvote is empty');
-        }
         if(!is_numeric($upvote)){
             throw new \InvalidArgumentException('$upvote is not a number');
         }
-        $this->upvote = $upvote;
+        $this->upvote = $upvote == null ? 0 : $upvote;
         return $this;
     }
 
@@ -115,7 +112,6 @@ class AnswerBuilder extends Answer
         $this->answers->questionID = $this->questionID;
         $this->answers->answer = $this->answer;
         $this->answers->upvote = $this->upvote;
-
         return $this->answers;
     }
 

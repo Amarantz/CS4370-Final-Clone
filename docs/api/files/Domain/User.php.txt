@@ -22,9 +22,22 @@ class User
     protected $email;
     
     /**
-    * @var $fullname Full name of the users
+    * @var $firstname first name of the users
     */
-    protected $fullName;
+    protected $firstname;
+
+    /**
+     * @var $lastname Last name of the user
+     */
+    protected $lastname;
+
+    /**
+     * @var $password
+     */
+    protected $password;
+
+    protected $created;
+    protected $updated;
 
     /**
      * Class Constructor takes in the email address and full name
@@ -34,11 +47,9 @@ class User
      * @param $email string of email address
      * @param $name String of full name
      */
-    public function __construct($email, $name)
+    public function __construct()
     {
-        $this->setEmail($email)
-           ->setFullname($name);
-        $this->id = uniqid('USR_', true);
+
     }
 /**
  *@return string email address
@@ -50,9 +61,9 @@ class User
 /**
  * @return string returns the full name
  */
-    public function getFullname()
+    public function getfullname()
     {
-        return $this->fullname;
+        return $this->firstname . ' ' . $this->lastname;
     }
 /**
  *@return string ID returns the id back
@@ -61,42 +72,60 @@ class User
     {
         return $this->id;
     }
-/**
- *@param $e is string of email address
- *
- * @returns self
- */
-    protected function setEmail($e)
-    {
-        if (empty($e)) {
-            throw new \InvalidArgumentException("empty arguments");
-        }
 
-        if (!is_string($e)) {
-            throw new \InvalidArgumentException("arguments are not strings");
-        }
-        if (!filter_var($e, FILTER_VALIDATE_EMAIL)) {
-            throw new \InvalidArgumentException("email is not valid");
-        }
-        $this->email = $e;
-        return $this;
+    public function getFirstname()
+    {
+        return $this->firstname;
     }
 
     /**
-     * @param $n string to set the fulll name
-     *
-     * @returns self
+     * @return mixed
      */
-    protected function setFullname($n)
+    public function getLastname()
     {
-        if (empty($n)) {
-            throw new \InvalidArgumentException("empty arguments");
-        }
-        if (!is_string($n)) {
-            throw new \InvalidArgumentException("arguments are not string");
-        }
-        $this->fullname = $n;
+        return $this->lastname;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function toArray()
+    {
+        return array(
+            'uuid' => $this->id,
+            'email' => $this->email,
+            'firstname' => $this->firstname,
+            'lastname' => $this->lastname,
+            'password' => $this->password,
+            'created' => $this->created,
+            'updated' => $this->updated,
+            );
+    }
+
+    protected function getParent(){
         return $this;
     }
+
 }
 
