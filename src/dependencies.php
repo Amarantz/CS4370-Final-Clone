@@ -153,3 +153,7 @@ $container['csrf'] = function ($c){
 $container[App\Middleware\CsrfViewMiddleware::class] = function ($c){
     return new \App\Middleware\CsrfViewMiddleware($c);
 };
+
+$continer[App\Controller\QuestionController::class] = function ($c) {
+    return new \App\Controller\QuestionController($c);
+};

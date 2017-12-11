@@ -47,11 +47,12 @@ class AuthController extends Controller
                 ->setEmail($request->getParam('f_username'))
                 ->setPassword(password_hash($request->getParam('f_password'), PASSWORD_BCRYPT, ['cost' => 13]))
                 ->build();
-            var_dump($user);
+            //var_dump($user);
             /** @var \App\Storage\UserRepository $repo */
             $repo = $this->UserRepositoryEloquent;
             $repo->Add($user);
             $this->logger->info('User created');
+            $this->auth->attempt($request->getParam('f_username'),$request->getParam('f_password'));
             return $response->withRedirect($this->router->pathFor('home'));
         }
         else{
@@ -74,6 +75,11 @@ class AuthController extends Controller
                 $this->logger->debug("User has logged in");
                 return $response->withRedirect($this->router->pathFor('home'));
             }
+    }
+
+    public function getLogout($request, $response){
+        $this->auth->logout();
+        return $response->withRedirect($this->router->pathFor('home'));
     }
 
 }
