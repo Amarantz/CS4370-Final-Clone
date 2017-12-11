@@ -90,7 +90,7 @@ class EloquentPlugin implements AdapterInterface
         {
             throw new UnexpectedValueException('$ID does not exist');
         }
-        return $this->query->where('uuid','=' ,$ID)->get();
+        return $this->query->where('uuid','=' ,$ID)->first();
 
 	}
 
@@ -132,7 +132,7 @@ class EloquentPlugin implements AdapterInterface
     /**
      * This requires that the column name is set on the  This should Also work with using numbers if need to pass to the database for querying
      * @param $searchValue
-     * @return \Illuminate\Support\Collection
+     * @return $mixed
      */
     public function GetByString($searchValue)
     {
@@ -144,7 +144,7 @@ class EloquentPlugin implements AdapterInterface
             throw new UnexpectedValueException('$String is empty');
         }
 
-        return $this->query->where($this->columnName,$searchValue)->get();
+        return $this->query->where($this->columnName,$searchValue)->first();
 
     }
 

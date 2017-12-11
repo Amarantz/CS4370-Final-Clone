@@ -61,7 +61,7 @@ class User
 /**
  * @return string returns the full name
  */
-    public function getfullname()
+    public function getFullname()
     {
         return $this->firstname . ' ' . $this->lastname;
     }

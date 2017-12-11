@@ -11,6 +11,8 @@ $app->get('/', App\Controller\HomeController::class.':index')->setName('home');
 $app->group('/auth', function(){
     $this->get('/register', App\Controller\Auth\AuthController::class.':getRegistration')->setName('auth.register');
     $this->post('/register', App\Controller\Auth\AuthController::class.':postRegistration');
+    $this->get('/login', App\Controller\Auth\AuthController::class.':getLogin')->setName('auth.login');
+    $this->post('/login', App\Controller\Auth\AuthController::class.':postLogin');
 });
 
 //$app->group('/users', function () {

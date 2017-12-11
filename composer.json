@@ -18,7 +18,8 @@
         "illuminate/database": "^5.5",
         "robmorgan/phinx": "^0.9.1",
         "respect/validation": "^1.1",
-        "johnkary/phpunit-speedtrap": "^2.0"
+        "johnkary/phpunit-speedtrap": "^2.0",
+        "slim/csrf": "^0.8.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.4",

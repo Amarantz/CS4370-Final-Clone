@@ -25,9 +25,9 @@ class AuthController extends Controller
         $validation = $this->validator->validate($request,[
             'f_username' => v::noWhitespace()->notEmpty(),
             'f_password' => v::noWhitespace()->notEmpty(),
-            'f_confirmPassword' => v::noWhitespace()->notEmpty()->alpha(),
-            'f_firstname' => v::noWhitespace()->notEmpty(),
-            'f_lastname' => v::noWhitespace()->notEmpty(),
+            'f_confirmPassword' => v::noWhitespace()->notEmpty(),
+            'f_firstname' => v::noWhitespace()->notEmpty()->alpha(),
+            'f_lastname' => v::noWhitespace()->notEmpty()->alpha(),
         ]);
 
         if($validation->failed()){
@@ -58,6 +58,22 @@ class AuthController extends Controller
             $this->logger->debug('passwords do not match');
             return $response->withRedirect($this->router->pathFor('auth.register'));
         }
+    }
+
+    public function getLogin($request,$response){
+        $return = $this->view->render($response, 'auth/login.twig');
+    }
+
+    public function postLogin($request, $response){
+            $this->logger->debug('We are posting user Login');
+            $auth = $this->auth->attempt($request->getParam('f_username'),$request->getParam('f_password'));
+            if(!$auth){
+                $this->logger->debug("Invalid loggin");
+                return $response->withRedirect($this->router->pathFor('auth.login'));
+            } else {
+                $this->logger->debug("User has logged in");
+                return $response->withRedirect($this->router->pathFor('home'));
+            }
     }
 
 }

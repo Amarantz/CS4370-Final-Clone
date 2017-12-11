@@ -155,7 +155,7 @@ class UserBuilder extends User
      * @return User
      */
     public function build(){
-        if(empty($this->id) || $this->id === ''){
+        if(empty($this->user->id) || $this->user->id === ''){
             $this->user->id = GENERATE_USER_UUID;
         }
         if(empty($this->created) || $this->created ===''){

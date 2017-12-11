@@ -6,27 +6,44 @@
                 <div class="panel-heading">Reigstration</div>
                 <div class="panel-body">
                     <form action="{{ path_for('auth.register') }}" method="post">
-                        <div class="form-group">
+                        <div class="form-group {{ errors.f_username ? ' has-error': ''}}">
                             <label for="f_username">Email</label>
+                            {{ errors | json_encode }}
                             <input type="email" name="f_username" id="f_username"  placeholder="you@domain.com" class="form-control" required>
+                            {% if error.f_username %}
+                            <span class="help-block">{{ errors.f_username | first }}</span>
+                            {% endif %}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group {{ errors.f_firstname ? ' has-error': ''}}">
                             <label for="f_firstname">Firstname</label>
                             <input type="text" name="f_firstname" id="f_firstname" class="form-control" required>
+                            {% if error.f_firstname %}
+                                <span class="help-block">{{ errors.f_firstname | first }}</span>
+                            {% endif %}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group {{ errors.f_lastname ? ' has-error': ''}}">
                             <label for="f_lastname">Lastname</label>
                             <input type="text" name="f_lastname" id="f_lastname" class="form-control" required>
+                            {% if error.f_lastname %}
+                                <span class="help-block">{{ errors.f_lastname | first }}</span>
+                            {% endif %}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group {{ errors.f_password ? ' has-error': ''}}">
                             <label for="f_password">Password</label>
                             <input type="password" name="f_password" id="f_password" class="form-control" required>
+                            {% if error.f_password %}
+                                <span class="help-block">{{ errors.f_password | first }}</span>
+                            {% endif %}
                         </div>
-                        <div class="form-group">
+                        <div class="form-group {{ errors.f_confirmPassword ? ' has-error': ''}}">
                             <label for="f_confirmPassword">Confirm Password</label>
                             <input type="password" name="f_confirmPassword" id="f_confirmPassword" class="form-control" required>
+                            {% if error.f_confirmPassword %}
+                                <span class="help-block">{{ errors.f_confirmPassword | first }}</span>
+                            {% endif %}
                         </div>
                         <button type="submit" class="btn btn-default">Register</button>
+                        {{ csrf.field | raw}}
                     </form>
                 </div>
             </div>

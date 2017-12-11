@@ -1,6 +1,8 @@
 <?php
 namespace App\Storage;
 use App\Storage\AdapterInterface;
+use Psr\Log\InvalidArgumentException;
+
 include('RespositoryInterface.php');
 
 class UserRepository implements RepositoryInterface
@@ -58,9 +60,9 @@ class UserRepository implements RepositoryInterface
     public function Find($id)
     {
         if($this->adapter->type() === \App\Storage\EloquentPlugin::class) {
-            $this->adapter->SetGetByStringColumn('email');
             $results = $this->adapter->Get($id);
             $users = $this->build($results);
+            //var_dump($users);
             return $users;
         }
 
@@ -75,7 +77,7 @@ class UserRepository implements RepositoryInterface
         if($this->adapter->type() === \App\Storage\EloquentPlugin::class) {
             $this->adapter->SetGetByStringColumn('email');
             $results = $this->adapter->GetAll();
-            $users = $this->build($results);
+            $users = $this->buildArray($results);
             return $users;
         }
         return $this->adapter->GetAll();
@@ -108,11 +110,20 @@ class UserRepository implements RepositoryInterface
      * @param $results
      * @return array
      */
-    protected function build($results){
+    protected function buildArray($results){
         $users = [];
         foreach($results as $user){
-            $ubuilder = new \App\Domain\UserBuilder();
-            $users[] = $ubuilder->setFirstname($user->firstname)
+            $users[] = $this->build($user);
+        }
+        return $users;
+    }
+
+    protected function build($user){
+        if(empty($user)){
+            throw new InvalidArgumentException('$user missing');
+        }
+        $ubuilder = new \App\Domain\UserBuilder();
+        return $ubuilder->setFirstname($user->firstname)
             ->setLastname($user->lastname)
             ->setID($user->uuid)
             ->setUpdated($user->updated)
@@ -120,8 +131,6 @@ class UserRepository implements RepositoryInterface
             ->setPassword($user->password)
             ->setEmail($user->email)
             ->build();
-        }
-        return $users;
     }
 
     public function FindByString($string)

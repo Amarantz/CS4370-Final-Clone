@@ -5,6 +5,10 @@
 
 $container = $app->getContainer();
 
+$container['auth'] = function($c){
+    return new \App\Auth\Auth($c);
+};
+
 // view
 $container['view'] = function ($c) {
     $settings = $c->get('settings');
@@ -13,6 +17,10 @@ $container['view'] = function ($c) {
     $view->addExtension(new \Slim\Views\TwigExtension($c->get('router'), $c->get('request')->getUri()));
     $view->addExtension(new \Twig_Extension_Debug());
 
+    $view->getEnvironment()->addGlobal('auth',[
+        'check' => $c->auth->check(),
+        'user' => $c->auth->user(),
+        ]);
     return $view;
 };
 
@@ -132,4 +140,16 @@ $container[App\Controller\Auth\AuthController::class] = function($c) {
 
 $container['validator'] = function($c) {
     return new \App\Validation\Validator;
+};
+
+$container[App\Middleware\ValidationErrorMiddleware::class] = function($c){
+    return new \App\Middleware\ValidationErrorMiddleware($c);
+};
+
+$container['csrf'] = function ($c){
+    return new \Slim\Csrf\Guard;
+};
+
+$container[App\Middleware\CsrfViewMiddleware::class] = function ($c){
+    return new \App\Middleware\CsrfViewMiddleware($c);
 };
