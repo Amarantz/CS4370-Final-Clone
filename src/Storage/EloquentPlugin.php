@@ -100,7 +100,7 @@ class EloquentPlugin implements AdapterInterface
      * @return \Illuminate\Support\Collection
      */
     public function GetAll() {
-        	return $this->query->select()->where('inactive','=',0)->get();
+        	return $this->query->where('inactive','=',0)->get();
 	}
 
 

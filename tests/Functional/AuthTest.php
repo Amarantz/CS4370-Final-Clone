@@ -12,7 +12,7 @@ class AuthTest extends BaseTestCase
         $response = $this->runApp('GET', '/auth/register');
 
         $this->assertEquals(200, $response->getStatusCode());
-        //$this->assertContains('Welcome to Web4350 Exchange', (string)$response->getBody());
+        $this->assertContains('Welcome to Web4350 Exchange', (string)$response->getBody());
         $this->assertContains('Email', (string)$response->getBody());
         $this->assertContains('Firstname', (string)$response->getBody());
         $this->assertContains('Lastname', (string)$response->getBody());

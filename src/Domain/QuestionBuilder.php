@@ -123,6 +123,12 @@ class QuestionBuilder extends Question
         if(empty($this->questions->ID)){
             $this->questions->ID = GENERATE_QUESTION_UUID;
         }
+        if(empty($this->questions->created)){
+            $this->questions->created = NOW;
+        }
+        if(empty($this->questions->updated)){
+            $this->questions->updated = NOW;
+        }
         return $this->questions;
     }
 }

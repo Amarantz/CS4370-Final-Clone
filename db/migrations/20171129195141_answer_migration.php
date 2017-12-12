@@ -49,7 +49,7 @@ class AnswerMigration extends AbstractMigration
         $table->addColumn('uuid','string',['limit'=>300])
             ->addColumn('questionTitle','string',['limit' => 300])
             ->addColumn('questionDetails','string',['limit' => 2000])
-            ->addColumn('userID', 'integer')
+            ->addColumn('userID', 'string',['limit' => 300])
             ->addColumn('created','datetime')
             ->addColumn('updated', 'datetime')
             ->addColumn('inactive', 'integer', ['default' => 0])

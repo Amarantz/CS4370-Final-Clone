@@ -3,7 +3,7 @@ namespace App\Storage;
 use App\Storage\AdapterInterface;
 use Psr\Log\InvalidArgumentException;
 
-include('RespositoryInterface.php');
+require_once('RespositoryInterface.php');
 
 class UserRepository implements RepositoryInterface
 {

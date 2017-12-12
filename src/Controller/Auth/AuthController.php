@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         if($validation->failed()){
             $this->logger->info('We are returing to the regisration page due to missing or invalid info');
-            return $response->withRedirect($this->router->pathFor('auth.register'));
+            return $response->withStauts(418)->withRedirect($this->router->pathFor('auth.register'));
         }
 
         $this->logger->debug('We are now signing up a user');
@@ -41,7 +41,7 @@ class AuthController extends Controller
         //var_dump($this->UserBuilder);
         if($request->getParam('f_password') === $request->getParam('f_confirmPassword')) {
             $this->logger->debug('Passwords are matching');
-            var_dump($request->getParams());
+            //var_dump($request->getParams());
             $user = $this->UserBuilder->setFirstname($request->getParam('f_firstname'))
                 ->setLastname($request->getParam('f_lastname'))
                 ->setEmail($request->getParam('f_username'))

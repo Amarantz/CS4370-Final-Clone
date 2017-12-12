@@ -84,10 +84,10 @@ class Question
         return array(
             'uuid' => $this->ID,
             'userID' => $this->userID,
-            'question' => $this->question,
+            'questionTitle' => $this->question,
             'created' => $this->created,
             'updated' => $this->updated,
-            'details' => $this->details,
+            'questionDetails' => $this->details,
         );
     }
 

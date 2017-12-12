@@ -7,14 +7,18 @@
  */
 
 namespace App\Storage;
-
+use App\Storage\AdapterInterface;
+use Psr\Log\InvalidArgumentException;
 /**
  * Creates an repository for questions that can be store data to different data adapters.
  * Class QuestionRepository
  * @package App\Storage
  */
+require_once('RespositoryInterface.php');
+
 class QuestionRepository implements RepositoryInterface
 {
+    /** @var AdapterInterface $adapter */
     protected $adapter;
 
     /**
@@ -23,7 +27,7 @@ class QuestionRepository implements RepositoryInterface
      */
     public function __construct(AdapterInterface $adapter)
     {
-        $this->adapter = $adapter;
+        $this->setAdapter($adapter);
     }
 
     /**
@@ -33,7 +37,7 @@ class QuestionRepository implements RepositoryInterface
      */
     public function Add($item)
     {
-         return $this->adapter->insert($item);
+         return $this->adapter->Insert($item);
     }
 
     /**
@@ -69,7 +73,15 @@ class QuestionRepository implements RepositoryInterface
      */
     public function FindAll()
     {
-         return $this->adapter->GetAll();
+       //var_dump($this->adapter->type());
+        if($this->adapter->type() === \App\Storage\EloquentPlugin::class){
+            $results = $this->adapter->getAll();
+            //var_dump($results);
+            $questions = $this->buildArray($results);
+            //var_dump($questions);
+            return $questions;
+        }
+        return $this->adapter->GetAll();
     }
 
     /**
@@ -77,12 +89,12 @@ class QuestionRepository implements RepositoryInterface
      * @param $mixed
      * @return mixed
      */
-    public function FindByString($mixed)
+    public function FindByString($string)
     {
         if($this->adapter->type() === \App\Storage\EloquentPlugin::class) {
-            $this->adapter->SetGetByStringColumn('questions');
+            $this->adapter->SetGetByStringColumn('questionTitle');
         }
-        return $this->adapter->GetByString($mixed);
+        return $this->adapter->GetByString($string);
     }
 
     /**
@@ -90,8 +102,32 @@ class QuestionRepository implements RepositoryInterface
      * @param $ID
      * @param $item
      */
-    public function Update($ID, $item)
-    {
+    public function Update($ID, $item)    {
         $this->adapter->Modify($ID, $item);
     }
+
+    public function setAdapter(AdapterInterface $adapter)
+    {
+        $this->adapter = $adapter;
+    }
+
+    protected function buildArray($results){
+        $questions = [];
+        foreach($results as $question){
+            $questions[] = $this->build($question);
+        }
+        return $questions;
+    }
+
+    protected function build($question){
+        $qbuilder = new \App\Domain\QuestionBuilder();
+        return $qbuilder->setID($question->uuid)
+            ->setQuestion($question->questionTitle)
+            ->setDetails($question->questionDetails)
+            ->setCreated($question->created)
+            ->setUpdated($question->updated)
+            ->setUser($question->userID)
+            ->build();
+    }
+
 }

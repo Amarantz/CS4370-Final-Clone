@@ -34,7 +34,7 @@ class HomepageTest extends BaseTestCase
 
         $this->assertEquals(405, $response->getStatusCode());
         // Because we can post in to the middleware for authentication we can post it directly to the home page and it handles the login.
-        //$this->assertContains('Method not allowed', (string)$response->getBody());
+       $this->assertContains('Method not allowed', (string)$response->getBody());
     }
 
 

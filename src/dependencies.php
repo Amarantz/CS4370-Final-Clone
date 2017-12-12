@@ -117,6 +117,26 @@ $container['UserRepositoryEloquent'] = function ($c) {
     return new \App\Storage\UserRepository($adapter);
 };
 
+$container['QuestionRepositoryEloquent'] = function ($c) {
+    /* @var \Slim\Container $c **/
+    //$c->get('logger')->info("We are setting the user Repository should be working");
+    //var_dump($c->get('EloquentPlugin')($c,'users'));
+    $builder = $c->get('db')->table('questions');
+    $adapter = new \App\Storage\EloquentPlugin($builder);
+    $c->get('logger')->info("we are have plugin to work with");
+    return new \App\Storage\QuestionRepository($adapter);
+};
+
+$container['AnswerRepositoryEloquent'] = function ($c) {
+    /* @var \Slim\Container $c **/
+    //$c->get('logger')->info("We are setting the user Repository should be working");
+    //var_dump($c->get('EloquentPlugin')($c,'users'));
+    $builder = $c->get('db')->table('answer');
+    $adapter = new \App\Storage\EloquentPlugin($builder);
+    // $c->get('logger')->info("we are have plugin to work with");
+    return new \App\Storage\UserRepository($adapter);
+};
+
 /**
  * @param $c
  * @return \App\Middleware\PasswordAuthentication
@@ -130,8 +150,24 @@ $container[App\Domain\User::class] = function ()
     return new \App\Domain\User();
 };
 
+$container[App\Domain\Question::class] = function () {
+    return new \App\Domain\Question();
+};
+
+$container[App\Domain\Answer::class] = function() {
+    return new \App\Domain\Answer();
+};
+
 $container['UserBuilder'] = function () {
     return new \App\Domain\UserBuilder();
+};
+
+$container['QuestionBuilder'] = function() {
+    return new \App\Domain\QuestionBuilder();
+};
+
+$conainer['AnswerBuilder'] = function() {
+    return new \App\Domain\AnswerBuilder();
 };
 
 $container[App\Controller\Auth\AuthController::class] = function($c) {
@@ -154,6 +190,10 @@ $container[App\Middleware\CsrfViewMiddleware::class] = function ($c){
     return new \App\Middleware\CsrfViewMiddleware($c);
 };
 
-$continer[App\Controller\QuestionController::class] = function ($c) {
+$container[App\Controller\QuestionController::class] = function ($c) {
+    return new \App\Controller\QuestionController($c);
+};
+
+$container['QuestionController'] = function ($c) {
     return new \App\Controller\QuestionController($c);
 };
