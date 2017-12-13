@@ -48,8 +48,8 @@ class QuestionController extends Controller
     }
 
     public function index($request,$response) {
-        //TODO: Need to create index page to display questions to the users
-        return;
+        $questions = $this->
+        return $this->view->render($response,'Questions/questionIndex.twig',[]);
     }
 
     public function getAll(){

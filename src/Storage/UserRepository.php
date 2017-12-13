@@ -3,7 +3,7 @@ namespace App\Storage;
 use App\Storage\AdapterInterface;
 use Psr\Log\InvalidArgumentException;
 
-require_once('RespositoryInterface.php');
+require_once('RepositoryInterface.php');
 
 class UserRepository implements RepositoryInterface
 {
@@ -75,7 +75,7 @@ class UserRepository implements RepositoryInterface
     public function FindAll()
     {
         if($this->adapter->type() === \App\Storage\EloquentPlugin::class) {
-            $this->adapter->SetGetByStringColumn('email');
+//            $this->adapter->SetGetByStringColumn('email');
             $results = $this->adapter->GetAll();
             $users = $this->buildArray($results);
             return $users;
@@ -120,7 +120,7 @@ class UserRepository implements RepositoryInterface
 
     protected function build($user){
         if(empty($user)){
-            throw new InvalidArgumentException('$user missing');
+            return null;
         }
         $ubuilder = new \App\Domain\UserBuilder();
         return $ubuilder->setFirstname($user->firstname)

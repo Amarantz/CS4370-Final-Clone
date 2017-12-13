@@ -125,7 +125,7 @@ class EloquentPlugin implements AdapterInterface
 		    throw new UnexpectedValueException('$item does not have a toArray() method');
         }
 
-		$this->query->where('uuid','=',$ID)->update($item->toArray);
+		$this->query->where('uuid','=',$ID)->update($item->toArray());
 	}
 
 
