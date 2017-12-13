@@ -20,6 +20,7 @@ class HomeController extends Controller
 
     public function index($request, $response){
         $questionController = $this->QuestionController->getAll();
-        return $this->container->view->render($response, 'home.twig', [ 'questions' => null ]);
+        //var_dump($questionController);
+        return $this->container->view->render($response, 'home.twig', [ 'questions' => $questionController ]);
     }
 }

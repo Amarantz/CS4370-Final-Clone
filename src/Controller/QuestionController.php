@@ -57,9 +57,9 @@ class QuestionController extends Controller
         /** @var \App\Storage\QuestionRepository $repo */
         $repo = $this->QuestionRepositoryEloquent;
         $this->logger->debug('Repo is setup now trying to get all Questions');
-        //$questions = $repo->FindAll();
+        $questions = $repo->FindAll();
         $this->logger->debug('We have data in the repo');
-        return null;
+        return $questions;
     }
 
 }

@@ -22,4 +22,5 @@ $app->group('/question', function(){
     $this->post('/form', App\Controller\QuestionController::class.':postForm');
     $this->get('/form/{id}/edit', App\Controller\QuestionController::class.':editForm')->setName('question.edit');
     $this->post('/form/{id}/edit', App\Controller\QuestionController::class.':postEditForm');
+    $this->get('/{id}', App\Controller\QuestionController::class.':getQuestion');
 });

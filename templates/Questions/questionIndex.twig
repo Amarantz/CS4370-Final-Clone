@@ -1,0 +1,9 @@
+{% block question %}
+    <div class="panel panel-body">
+    {% for question in questions %}
+        <div class="row">
+        <li><a href="/question/{{ question.getID }}">{{ question.getQuestion }}</a></li>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -3,12 +3,11 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
-                <div class="panel-heading">Reigstration</div>
+                <div class="panel-heading">Registration</div>
                 <div class="panel-body">
                     <form action="{{ path_for('auth.register') }}" method="post">
                         <div class="form-group {{ errors.f_username ? ' has-error': ''}}">
                             <label for="f_username">Email</label>
-                            {{ errors | json_encode }}
                             <input type="email" name="f_username" id="f_username"  placeholder="you@domain.com" class="form-control" required>
                             {% if error.f_username %}
                             <span class="help-block">{{ errors.f_username | first }}</span>

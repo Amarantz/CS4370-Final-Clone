@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         if($validation->failed()){
             $this->logger->info('We are returing to the regisration page due to missing or invalid info');
-            return $response->withStauts(418)->withRedirect($this->router->pathFor('auth.register'));
+            return $response->withRedirect($this->router->pathFor('auth.register'));
         }
 
         $this->logger->debug('We are now signing up a user');
