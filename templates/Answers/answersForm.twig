@@ -1,0 +1,27 @@
+{% extends 'app.twig' %}
+{% block content %}
+<div class="row">
+    <script>
+        var container = document.getElementById('editor');
+        var quill = new Quill(container, {
+            theme: 'bubble'   // Specify theme in configuration
+        });
+    </script>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Question</div>
+            <div class="panel-body">
+                <form action="{{ path_for('answers.post') }}" method="post">
+                    <div class="form-group{{ errors.f_detail ? ' has-error': ''}}">
+                        <label for="f_answer">Details</label>
+                        <textarea name="f_answer" id="f_answer" class="form-control editor" rows="15"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                    {{ hidden | raw }}
+                    {{ csrf.field | raw }}
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

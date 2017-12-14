@@ -24,5 +24,5 @@ $app->get('/question/form/{id}/edit', App\Controller\QuestionController::class.'
 $app->post('/question/form/{id}/edit', App\Controller\QuestionController::class.':postEditForm');
 //$app->get('/question/{id}', App\Controller\QuestionController::class.':getQuestion');
 
-$app->get('/answer/{id}', App\Controller\AnswerController::class.':getForm')->setName('answer.form');
-$app->post('/answer', App\Controller\AnswerController::class.':postForm');
+$app->get('/answer/{id}', App\Controller\AnswerController::class.':getForm')->setName('answers.form');
+$app->post('/answer', App\Controller\AnswerController::class.':postForm')->setName('answers.post');
