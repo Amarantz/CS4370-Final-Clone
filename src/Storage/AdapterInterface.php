@@ -11,4 +11,5 @@ interface AdapterInterface
     public function Modify($id, $item);
     public function GetByString($string);
     public function Type();
+    public function GetByStringAll($string);
 }

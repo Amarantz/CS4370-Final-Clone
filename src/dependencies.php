@@ -127,14 +127,14 @@ $container['QuestionRepositoryEloquent'] = function ($c) {
     return new \App\Storage\QuestionRepository($adapter);
 };
 
-$container['AnswerRepositoryEloquent'] = function ($c) {
+$container['AnswersRepositoryEloquent'] = function ($c) {
     /* @var \Slim\Container $c **/
     //$c->get('logger')->info("We are setting the user Repository should be working");
     //var_dump($c->get('EloquentPlugin')($c,'users'));
     $builder = $c->get('db')->table('answer');
     $adapter = new \App\Storage\EloquentPlugin($builder);
-    // $c->get('logger')->info("we are have plugin to work with");
-    return new \App\Storage\UserRepository($adapter);
+     $c->get('logger')->info("we are have plugin for answers to work with");
+    return new \App\Storage\AnswersRepository($adapter);
 };
 
 /**

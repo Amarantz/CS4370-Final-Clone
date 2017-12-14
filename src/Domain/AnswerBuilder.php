@@ -12,13 +12,7 @@ class AnswerBuilder extends Answer
 {
 
     protected $answers;
-
-    public function __construct()
-    {
-        $this->answers = new Answer();
-    }
-
-    public function setID($uuid) {
+        public function setID($uuid) {
         if(empty($uuid)){
             throw new \InvalidArgumentException('$uuid is empty');
         }
@@ -105,14 +99,15 @@ class AnswerBuilder extends Answer
         if(empty($this->ID)){
             $this->ID = GENERATE_ANSWER_UUID;
         }
-        $this->answers->ID= $this->ID;
-        $this->answers->created = $this->created;
-        $this->answers->updated = $this->updated;
-        $this->answers->userID = $this->userID;
-        $this->answers->questionID = $this->questionID;
-        $this->answers->answer = $this->answer;
-        $this->answers->upvote = $this->upvote;
-        return $this->answers;
+        $answers = new \App\Domain\Answer();
+        $answers->ID = $this->ID;
+        $answers->created = $this->created;
+        $answers->updated = $this->updated;
+        $answers->userID = $this->userID;
+        $answers->questionID = $this->questionID;
+        $answers->answer = $this->answer;
+        $answers->upvote = $this->upvote;
+        return $answers;
     }
 
 }

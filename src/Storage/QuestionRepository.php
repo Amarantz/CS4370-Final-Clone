@@ -64,8 +64,10 @@ class QuestionRepository implements RepositoryInterface
      */
     public function Find($ID)
     {
-            //TODO: Fix Plugin for
-         return $this->adapter->Get($ID);
+        if($this->adapter->type() === \App\Storage\EloquentPlugin::class) {
+            return $this->build($this->adapter->Get($ID));
+        }
+        return $this->adapter->Get($ID);
     }
 
     /**
@@ -131,4 +133,8 @@ class QuestionRepository implements RepositoryInterface
             ->build();
     }
 
+    public function FindByStringAll($string)
+    {
+        // TODO: Implement FindByStringAll() method.
+    }
 }

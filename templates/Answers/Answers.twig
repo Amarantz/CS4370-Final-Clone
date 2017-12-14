@@ -1,0 +1,11 @@
+{% if awnsers %}
+    <h1>Answers</h1>
+    <div>
+    {% for awn in awnsers %}
+        <div>
+            <div><p>{{ awn.getAnswer }}</p></div>
+            <div>{{ awn.getUpvote }}</div>
+        </div>
+    {% endfor %}
+    </div>
+{% endif %}

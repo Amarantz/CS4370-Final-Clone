@@ -172,4 +172,17 @@ class EloquentPlugin implements AdapterInterface
          $this->columnName = $column_name;
          return $this;
     }
+
+    public function GetByStringAll($string)
+    {
+        if($this->columnName === ''){
+            throw new UnexpectedValueException('$columnName is not set');
+        }
+
+        if(empty($string)){
+            throw new UnexpectedValueException('$String is empty');
+        }
+
+        return $this->query->where($this->columnName,$string)->get();
+    }
 }

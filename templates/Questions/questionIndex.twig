@@ -1,10 +1,7 @@
 {% extends 'app.twig'%}
-{% block question %}
+{% block content %}
     <div class="panel panel-body">
-    {% for question in questions %}
-        <div class="row">
-        <li><a href="{{ base_url }}/question/{{ question.getID }}">{{ question.getQuestion }}</a></li>
-        </div>
-    {% endfor %}
+        <p>Top Recent Questions</p>
+        {% include 'Questions/questionPart.twig' %}
     </div>
 {% endblock %}

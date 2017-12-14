@@ -137,4 +137,9 @@ class UserRepository implements RepositoryInterface
     {
         // TODO: Implement FindByString() method.
     }
+
+    public function FindByStringAll($string)
+    {
+        // TODO: Implement FindByStringAll() method.
+    }
 }

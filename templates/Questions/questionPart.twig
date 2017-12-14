@@ -1,0 +1,7 @@
+    <div class="panel panel-body">
+        {% for question in questions %}
+            <div class="row">
+                <li><a href="{{ base_url }}/question/q/{{ question.getID |replace({".":"-"})}}">{{ question.getQuestion }}</a></li>
+            </div>
+        {% endfor %}
+    </div>

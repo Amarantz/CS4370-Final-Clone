@@ -17,4 +17,5 @@ interface RepositoryInterface{
     public function FindAll();
     public function FindByString($string);
     public function Update($ID, $item);
+    public function FindByStringAll($string);
 }

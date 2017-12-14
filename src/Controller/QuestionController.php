@@ -48,8 +48,8 @@ class QuestionController extends Controller
     }
 
     public function index($request,$response) {
-        $questions = $this->
-        return $this->view->render($response,'Questions/questionIndex.twig',[]);
+        $questions = $this->getAll();
+        return $this->view->render($response,'Questions/questionIndex.twig',['questions' => $questions ]);
     }
 
     public function getAll(){
@@ -62,4 +62,17 @@ class QuestionController extends Controller
         return $questions;
     }
 
+    public function getQuestion($request,$response, $args)
+    {
+        $this->logger->debug("we are trying to get the question.");
+        $id = $args['id'];
+        $id = str_replace('-','.',$id);
+        $repo = $this->QuestionRepositoryEloquent->Find($id);
+        //var_dump($repo);
+        $answers = $this->AnswersRepositoryEloquent->FindAnswersByQuestionID($id);
+        //var_dump($answers);
+
+    return $this->view->render($response,'Questions/questionsAnswers.twig', ['question' => $repo, 'awnsers' => $answers]);
+
+    }
 }
