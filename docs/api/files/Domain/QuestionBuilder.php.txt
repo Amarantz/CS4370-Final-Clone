@@ -17,14 +17,6 @@ class QuestionBuilder extends Question
 //    protected $user;
 //    protected $updatedDate;
 //    protected $creationDate;
-
-    protected $questions;
-
-    public function __construct()
-    {
-        $this->questions = new \App\Domain\Question();
-    }
-
     public function setID($uuid)
     {
         if(empty($uuid))
@@ -35,7 +27,7 @@ class QuestionBuilder extends Question
         {
             throw new \InvalidArgumentException('$uuid is not a string');
         }
-        $this->questions->ID = $uuid;
+        $this->ID = $uuid;
         return $this;
     }
 
@@ -57,7 +49,7 @@ class QuestionBuilder extends Question
         if (strlen($question) > 256) {
             throw new \InvalidArgumentException("Question length is to long");
         }
-        $this->questions->question = $question;
+        $this->question = $question;
         return $this;
     }
 
@@ -78,7 +70,7 @@ class QuestionBuilder extends Question
                 throw new \InvalidArgumentException("Question body is to long");
             }
 
-            $this->questions->details = $details;
+            $this->details = $details;
             return $this;
     }
 
@@ -91,7 +83,7 @@ class QuestionBuilder extends Question
         {
             throw new \InvalidArgumentException('$user is not a string');
         }
-        $this->questions->userID = $userID;
+        $this->userID = $userID;
         return $this;
     }
 
@@ -103,7 +95,7 @@ class QuestionBuilder extends Question
         if(!is_string($date)){
             throw new \InvalidArgumentException('$date is not string');
         }
-        $this->questions->updatedDate = $date;
+        $this->updatedDate = $date;
         return $this;
     }
 
@@ -115,14 +107,27 @@ class QuestionBuilder extends Question
         if(!is_string($date)){
             throw new \InvalidArgumentException('$date is not string');
         }
-        $this->questions->updatedDate = $date;
+        $this->updatedDate = $date;
         return $this;
     }
 
     public function build(){
-        if(empty($this->questions->ID)){
-            $this->questions->ID = GENERATE_QUESTION_UUID;
+        if(empty($this->ID)){
+            $this->ID = GENERATE_QUESTION_UUID;
         }
-        return $this->questions;
+        if(empty($this->created)){
+            $this->created = NOW;
+        }
+        if(empty($this->updated)){
+            $this->updated = NOW;
+        }
+        $q = new \App\Domain\Question();
+        $q->question = $this->question;
+        $q->ID = $this->ID;
+        $q->userID = $this->userID;
+        $q->updated = $this->updated;
+        $q->created = $this->created;
+        $q->details = $this->details;
+        return $q;
     }
 }

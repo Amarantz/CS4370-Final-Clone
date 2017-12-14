@@ -9,6 +9,8 @@
 namespace App\Storage;
 
 
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
+
 class AnswersRepository implements RepositoryInterface
 {
 
@@ -20,7 +22,7 @@ class AnswersRepository implements RepositoryInterface
      */
     public function __construct(AdapterInterface $adapter)
     {
-        $this->adapter = $adapter;
+        $this->setAdapter($adapter);
     }
 
     /**
@@ -84,5 +86,60 @@ class AnswersRepository implements RepositoryInterface
     public function Update($ID, $item)
     {
         $this->adapter->Modify($ID, $item);
+    }
+
+    /**
+     * @param $results
+     * @return array
+     */
+    protected function buildArray($results){
+        $anwsers = [];
+        foreach($results as $anwser){
+            $r = $this->build($anwser);
+            //var_dump($r);
+            $anwsers[] = $r;
+        }
+        return $anwsers;
+    }
+
+    /**
+     * @param $answer
+     * @return \App\Domain\Answer
+     */
+    protected function build($answer){
+        $aBuilder = new \App\Domain\AnswerBuilder();
+        return $aBuilder->setID($answer->uuid)
+            ->setQuestionID($answer->questionID)
+            ->setAnswer($answer->answer)
+            ->setCreated($answer->created)
+            ->setUpdated($answer->updated)
+            ->setUserID($answer->userID)
+            ->setUpvote($answer->upvote)
+            ->build();
+    }
+
+    /**
+     * @param $questionID
+     * @return array
+     */
+    public function FindAnswersByQuestionID($questionID){
+        if($this->adapter->type() === \App\Storage\EloquentPlugin::class) {
+            $this->adapter->SetGetByStringColumn('questionID');
+            $results = $this->adapter->GetByStringAll($questionID);
+            //var_dump($results);
+            return $this->buildArray($results);
+
+        }
+        return $this->adapter->GetByStringAll($questionID);
+    }
+
+    public function setAdapter(AdapterInterface $adapter)
+    {
+        $this->adapter = $adapter;
+    }
+
+    public function FindByStringAll($string)
+    {
+        // TODO: Implement FindByStringAll() method.
     }
 }

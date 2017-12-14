@@ -90,7 +90,7 @@ class EloquentPlugin implements AdapterInterface
         {
             throw new UnexpectedValueException('$ID does not exist');
         }
-        return $this->query->where('uuid','=' ,$ID)->get();
+        return $this->query->where('uuid','=' ,$ID)->first();
 
 	}
 
@@ -100,7 +100,7 @@ class EloquentPlugin implements AdapterInterface
      * @return \Illuminate\Support\Collection
      */
     public function GetAll() {
-        	return $this->query->select()->where('inactive','=',0)->get();
+        	return $this->query->where('inactive','=',0)->get();
 	}
 
 
@@ -125,14 +125,14 @@ class EloquentPlugin implements AdapterInterface
 		    throw new UnexpectedValueException('$item does not have a toArray() method');
         }
 
-		$this->query->where('uuid','=',$ID)->update($item->toArray);
+		$this->query->where('uuid','=',$ID)->update($item->toArray());
 	}
 
 
     /**
      * This requires that the column name is set on the  This should Also work with using numbers if need to pass to the database for querying
      * @param $searchValue
-     * @return \Illuminate\Support\Collection
+     * @return $mixed
      */
     public function GetByString($searchValue)
     {
@@ -144,7 +144,7 @@ class EloquentPlugin implements AdapterInterface
             throw new UnexpectedValueException('$String is empty');
         }
 
-        return $this->query->where($this->columnName,$searchValue)->get();
+        return $this->query->where($this->columnName,$searchValue)->first();
 
     }
 
@@ -171,6 +171,19 @@ class EloquentPlugin implements AdapterInterface
 
          $this->columnName = $column_name;
          return $this;
+    }
+
+    public function GetByStringAll($string)
+    {
+        if($this->columnName === ''){
+            throw new UnexpectedValueException('$columnName is not set');
+        }
+
+        if(empty($string)){
+            throw new UnexpectedValueException('$String is empty');
+        }
+
+        return $this->query->where($this->columnName,$string)->get();
     }
 }
 

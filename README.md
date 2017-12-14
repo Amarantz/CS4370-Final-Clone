@@ -8,6 +8,9 @@ You are going to build the back-end for a Q&A App with PHP7, Illuminate Database
 - PHP 7.0.x
 - Composer
 - Twig
+- Eloquent
+- Slim framework
+- Slim Cross Site request forgery 
 - Phinx
 - MySQL
 - Memcached

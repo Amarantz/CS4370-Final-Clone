@@ -5,6 +5,10 @@
 
 $container = $app->getContainer();
 
+$container['auth'] = function($c){
+    return new \App\Auth\Auth($c);
+};
+
 // view
 $container['view'] = function ($c) {
     $settings = $c->get('settings');
@@ -13,6 +17,10 @@ $container['view'] = function ($c) {
     $view->addExtension(new \Slim\Views\TwigExtension($c->get('router'), $c->get('request')->getUri()));
     $view->addExtension(new \Twig_Extension_Debug());
 
+    $view->getEnvironment()->addGlobal('auth',[
+        'check' => $c->auth->check(),
+        'user' => $c->auth->user(),
+        ]);
     return $view;
 };
 
@@ -76,23 +84,12 @@ $container['phpErrorHandler'] = function ($c) {
 // classes/objects
 /**
  * @param $c
- * @return \App\Actions\HomeAction
+ * @return \App\Controller\HomeController
  */
-$container[App\Actions\HomeAction::class] = function ($c) {
-    return new \App\Actions\HomeAction($c->get('view'), $c->get('logger'));
+$container[App\Controller\HomeController::class] = function ($c) {
+    return new \App\Controller\HomeController($c);
 };
 
-/**
- * @param $c
- * @return \App\Actions\ProfileAction
- */
-$container[App\Actions\ProfileAction::class] = function ($c) {
-    $view = $c->get('view');
-    $logger = $c->get('logger');
-    $table = $c->get('db')->table('users');
-
-    return new \App\Actions\ProfileAction($view, $logger, $table);
-};
 
 /**
  * @param $c
@@ -120,6 +117,26 @@ $container['UserRepositoryEloquent'] = function ($c) {
     return new \App\Storage\UserRepository($adapter);
 };
 
+$container['QuestionRepositoryEloquent'] = function ($c) {
+    /* @var \Slim\Container $c **/
+    //$c->get('logger')->info("We are setting the user Repository should be working");
+    //var_dump($c->get('EloquentPlugin')($c,'users'));
+    $builder = $c->get('db')->table('questions');
+    $adapter = new \App\Storage\EloquentPlugin($builder);
+    $c->get('logger')->info("we are have plugin to work with");
+    return new \App\Storage\QuestionRepository($adapter);
+};
+
+$container['AnswersRepositoryEloquent'] = function ($c) {
+    /* @var \Slim\Container $c **/
+    //$c->get('logger')->info("We are setting the user Repository should be working");
+    //var_dump($c->get('EloquentPlugin')($c,'users'));
+    $builder = $c->get('db')->table('answer');
+    $adapter = new \App\Storage\EloquentPlugin($builder);
+     $c->get('logger')->info("we are have plugin for answers to work with");
+    return new \App\Storage\AnswersRepository($adapter);
+};
+
 /**
  * @param $c
  * @return \App\Middleware\PasswordAuthentication
@@ -131,4 +148,52 @@ $container[App\Middleware\PasswordAuthentication::class] = function($c) {
 $container[App\Domain\User::class] = function ()
 {
     return new \App\Domain\User();
+};
+
+$container[App\Domain\Question::class] = function () {
+    return new \App\Domain\Question();
+};
+
+$container[App\Domain\Answer::class] = function() {
+    return new \App\Domain\Answer();
+};
+
+$container['UserBuilder'] = function () {
+    return new \App\Domain\UserBuilder();
+};
+
+$container['QuestionBuilder'] = function() {
+    return new \App\Domain\QuestionBuilder();
+};
+
+$container['AnswerBuilder'] = function() {
+    return new \App\Domain\AnswerBuilder();
+};
+
+$container[App\Controller\Auth\AuthController::class] = function($c) {
+    return new \App\Controller\Auth\AuthController($c);
+};
+
+$container['validator'] = function($c) {
+    return new \App\Validation\Validator;
+};
+
+$container[App\Middleware\ValidationErrorMiddleware::class] = function($c){
+    return new \App\Middleware\ValidationErrorMiddleware($c);
+};
+
+$container['csrf'] = function ($c){
+    return new \Slim\Csrf\Guard;
+};
+
+$container[App\Middleware\CsrfViewMiddleware::class] = function ($c){
+    return new \App\Middleware\CsrfViewMiddleware($c);
+};
+
+$container[App\Controller\QuestionController::class] = function ($c) {
+    return new \App\Controller\QuestionController($c);
+};
+
+$container['QuestionController'] = function ($c) {
+    return new \App\Controller\QuestionController($c);
 };
