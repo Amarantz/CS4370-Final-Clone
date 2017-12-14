@@ -1,6 +1,10 @@
 <div>
     {% if question %}
-    <h1>{{ question.getQuestion}}</h1>
-    <p>{{ question.getDetails}}</p>
+        {% if auth.check %}
+            {% set id = question.getID | replace({'.':'-'}) %}
+            <a href="{{ path_for('answers.form',{'id':id}) }}">Add an Answer</a>
+        {% endif %}
+        <h1>{{ question.getQuestion}}</h1>
+        <p>{{ question.getDetails}}</p>
     {% endif %}
 </div>

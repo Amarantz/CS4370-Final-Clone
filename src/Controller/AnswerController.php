@@ -13,6 +13,7 @@ class AnswerController extends Controller
 {
     public function getForm($request,$response,$args){
         if(!$this->auth->check()){
+            $_SESSION['vError'] = ['Signin' => ' User is not signed'];
             return $response->withRedirect($this->router->pathFor('auth.login'));
         }
         $id = str_replace('-','.',$args['id']);
@@ -21,7 +22,28 @@ class AnswerController extends Controller
             'id' => $id]);
     }
 
-    public function postForm($request,$response,$args){
+    public function postForm($request,$response,$args) {
+        //var_dump($request->getParams());
+        if(!$this->auth->check()){
+            $_SESSION['vError'] = ['Signin' => ' User is not signed'];
+            return $response->withRedirect($this->router->pathFor('auth.login'));
+        }
 
+        $user = $this->auth->user();
+        /** @var \App\Domain\AnswerBuilder $abuilder */
+        $abuilder = $this->AnswerBuilder;
+        //var_dump($abuilder);
+        //print($user->getID());
+        $answer = $abuilder->setQuestionID($request->getParam('f_questionID'))
+            ->setUserID($user->getID())
+            ->setAnswer($request->getParam('f_answer'))
+            ->build();
+        /** @var \App\Storage\AnswersRepository $repo */
+        $repo = $this->AnswersRepositoryEloquent;
+        $repo->Add($answer);
+        return $response->withRedirect($this->router->pathFor(
+            'question.id', [
+                'id' => str_replace('.','-',$request->getParam('f_questionID'))
+            ]));
     }
 }

@@ -166,7 +166,7 @@ $container['QuestionBuilder'] = function() {
     return new \App\Domain\QuestionBuilder();
 };
 
-$conainer['AnswerBuilder'] = function() {
+$container['AnswerBuilder'] = function() {
     return new \App\Domain\AnswerBuilder();
 };
 

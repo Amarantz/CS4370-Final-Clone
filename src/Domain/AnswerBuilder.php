@@ -95,10 +95,19 @@ class AnswerBuilder extends Answer
     }
 
 
-    public function build(){
-        if(empty($this->ID)){
+    public function build() {
+        if(empty($this->ID)) {
             $this->ID = GENERATE_ANSWER_UUID;
         }
+
+        if(empty($this->created)) {
+            $this->created = NOW;
+        }
+
+        if(empty($this->updated)) {
+            $this->updated = NOW;
+        }
+
         $answers = new \App\Domain\Answer();
         $answers->ID = $this->ID;
         $answers->created = $this->created;
@@ -106,7 +115,7 @@ class AnswerBuilder extends Answer
         $answers->userID = $this->userID;
         $answers->questionID = $this->questionID;
         $answers->answer = $this->answer;
-        $answers->upvote = $this->upvote;
+        $answers->upvote = empty($this->upvote) ? 0 : $this->upvote;
         return $answers;
     }
 

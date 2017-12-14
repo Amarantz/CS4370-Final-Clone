@@ -74,6 +74,9 @@ class Answer
     {
         return $this->updated;
     }
+    public function getID(){
+        return $this->ID;
+    }
 
     public function toArray(){
         return array(
